@@ -1,18 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Header from '../components/Header/Header';
-import Sidebars from '../components/Sidebar/Sidebar';
+import Sidebar from '../components/Sidebar/Sidebar';
 import { Row, Col } from 'reactstrap';
 
 class Layout extends Component {
     render() {
         return (
             <div>
-                <Header childProps={this.props.childProps}/>
                 <Row>
-                    <Col lg="2"><Sidebars/></Col>
-                    <Col lg="10">Main Content</Col>
+                    <Col xs="2 " sm="4" md="4" lg="2"><Sidebar/></Col>
+                    <Col xs="10 " sm="8" md="8" lg="10" id="page-wrap">
+                        <Row><Header childProps={this.props.childProps} /></Row>
+                        <Row>Main Content</Row>
+                    </Col>
                 </Row>
-                {/* footer */}
             </div>
         )
     }

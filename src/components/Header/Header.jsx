@@ -34,7 +34,7 @@ class Header extends Component {
         return (
             <Navbar color="white" light className="headerContainer">
                 {/* <NavbarBrand tag={Link} to="/">Coinsxfer</NavbarBrand> */}
-                <NavbarToggler onClick={this.toggle} />
+                {/* <NavbarToggler onClick={this.toggle} /> */}
                 <NavbarBrand tag={RRNavLink} to={this.props.childProps.isAuthenticated ? "/dashboard" : "/login"} className="headerLogo">
                     Hello Admin
                 </NavbarBrand>

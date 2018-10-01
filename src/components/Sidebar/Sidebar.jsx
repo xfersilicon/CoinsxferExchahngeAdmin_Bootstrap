@@ -1,149 +1,49 @@
-import React from "react";
-import Sidebar from "react-sidebar";
- 
+import React, {Component} from "react";
+import { slide as Menu } from "react-burger-menu";
+
 const mql = window.matchMedia(`(min-width: 800px)`);
- 
-class Sidebars extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarDocked: mql.matches,
-      sidebarOpen: false
-    };
- 
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
- 
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
-  }
- 
-  componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
-  }
- 
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
- 
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-  }
- 
-  render() {
-    return (
-      <Sidebar
-        sidebar={<b>Sidebar content</b>}
-        open={this.state.sidebarOpen}
-        docked={this.state.sidebarDocked}
-        onSetOpen={this.onSetSidebarOpen}
-      >
-        <b>Main content</b>
-      </Sidebar>
-    );
-  }
+
+export default class Sidebar extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			mql: mql,
+			menuIsOpen: false //Menu bugs out if set to true initial on push mode
+		}
+		this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+	}
+
+	componentDidMount() {
+		//Using componentDidMount because the menu bugs if setting isOpen = true before mounted
+		this.setState({ mql: mql, menuIsOpen: this.state.mql.matches });
+	}
+
+	componentWillMount() {
+		mql.addListener(this.mediaQueryChanged);
+	}
+
+	componentWillUnmount() {
+		this.state.mql.removeListener(this.mediaQueryChanged);
+	}
+
+	mediaQueryChanged() {
+		console.log("width below 800px", !this.state.mql.matches);
+		this.setState({ menuIsOpen: this.state.mql.matches });
+	}
+
+	render(props) {
+		return (
+			<div id="outer-container">
+				{/* Probably better off using your own button for menu open with this method (customBurgerIcon={false}) */}
+				<Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} isOpen={this.state.menuIsOpen} noOverlay
+                    disableCloseOnEsc disableOverlayClick={true}> 
+					<a id="home" className="menu-item" href="/">Home</a>
+					<a id="about" className="menu-item" href="/about">About</a>
+					<a id="contact" className="menu-item" href="/contact">Contact</a>
+					<a className="menu-item--small" href="">Settings</a>
+				</Menu>
+			</div>
+		);
+	}
 }
- 
-export default Sidebars;
-
-// import { stack as Menu } from 'react-burger-menu';
-// import React, { Fragment } from 'react';
- 
-// class Sidebar extends React.Component {
-//   showSettings (event) {
-//     event.preventDefault();
-//   }
- 
-//   render () {
-//     return (
-//       <Menu width={ 200 } isOpen={false} noOverlay disableCloseOnEsc >
-//         <a id="home" className="menu-item" href="/">Home</a>
-//         <a id="about" className="menu-item" href="/about">About</a>
-//         <a id="contact" className="menu-item" href="/contact">Contact</a>
-//         <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-//       </Menu>
-//     );
-//   }
-// }
-
-// export default Sidebar;
-
-// import React, { Fragment } from 'react';
-// import { Link } from 'react-router-dom';
-// import { Nav, NavItem, NavLink } from 'reactstrap';
-// import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
-// const Sidebar = () => {
-//     return (
-//         <Fragment>
-//             {/* <UncontrolledDropdown>
-//                 <DropdownToggle caret>
-//                     Dropdown
-//                 </DropdownToggle>
-//                 <DropdownMenu>
-//                     <DropdownItem header>Header</DropdownItem>
-//                     <DropdownItem disabled>Action</DropdownItem>
-//                     <DropdownItem>Another Action</DropdownItem>
-//                     <DropdownItem divider />
-//                     <DropdownItem>Another Action</DropdownItem>
-//                 </DropdownMenu>
-//             </UncontrolledDropdown> */}
-//             <Nav vertical>
-//                 <NavItem>
-//                     <NavLink href="#">Link</NavLink>
-//                 </NavItem>
-//                 <NavItem>
-//                     <NavLink href="#">Link</NavLink>
-//                 </NavItem>
-//                 <NavItem>
-//                     <NavLink href="#">Another Link</NavLink>
-//                 </NavItem>
-//                 <NavItem>
-//                     <NavLink disabled href="#">Disabled Link</NavLink>
-//                 </NavItem>
-//             </Nav>
-
-
-//             {/* <ul className="sidebar-nav">
-//                 <li>
-//                     <Link to="">
-//                         Dashboard
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//                 <li>
-//                     <Link to="">
-//                         Start Bootstrap
-//                     </Link>
-//                 </li>
-//             </ul> */}
-//         </Fragment>
-//     )
-// }
-
-// export default Sidebar;
