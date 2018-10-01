@@ -5,8 +5,8 @@ import AccountStatus from "../components/AccountStatus/AccountStatus";
 import AdvancedSearch from "../components/AdvancedSearch/AdvancedSearch";
 import DailyReport from "../components/BalanceReport/DailyReport";
 import SearchReport from "../components/BalanceReport/SearchReport";
-import BuyCommissionSettings from "../components/CommissionsSettings/BuyCommissionSettings";
-import SellCommissionSettings from "../components/CommissionsSettings/SellCommissionSettings";
+import BuyCommissionSettings from "../components/CommissionSettings/BuyCommissionSettings";
+import SellCommissionSettings from "../components/CommissionSettings/SellCommissionSettings";
 import Info from "../components/CustomersInfo/Info";
 import KycDetails from "../components/CustomersInfo/KycDetails";
 import Dashboard from "../components/Dashboard/Dashboard";
@@ -21,6 +21,8 @@ import Transactions from "../components/Transactions/Transactions";
 import BalanceReportTransfers from "../components/Transfers/BalanceReportTransfers";
 import DepositTransfers from "../components/Transfers/DepositTransfers";
 import WithdrawalTransfers from "../components/Transfers/WithdrawalTransfers";
+
+import AppliedRoute from './AppliedRoutes/AppliedRoutes'
 
 export default ({ childProps }) => {
     return (
