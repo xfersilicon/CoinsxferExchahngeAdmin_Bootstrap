@@ -1361,10 +1361,12 @@ input[type="submit"] {
 /*Header Styles - start*/
 .headerContainer{
     border-bottom: 1px solid #2859a8;
+    background: #2859a8;
+    margin-left: -6px;
 }
 
 .headerContainer a{
-    color: #2859a8;
+    color: #ffffff;
 }
 
 .list-group {
@@ -1634,4 +1636,140 @@ input[type=date], .css-1492t68{
 .css-2o5izw, .Select-control {
     box-shadow: 0 0 5px 1px green !important;
     border-color: #008000 !important;
+}
+
+#App {
+    font-family: sans-serif;
+
+    /* Give app full page to work with */
+    height: 100vh;
+}
+
+#page-wrap {
+    text-align: center;
+
+    /* Prevent sidebar from showing a scrollbar on page */
+    overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+    display: inline-block;
+
+    /* Our sidebar item styling */
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: #252525;
+    transition: color 0.2s;
+}
+
+/* Change color on hover */
+
+
+/* The rest copied directly from react-burger-menu docs */
+
+@media only screen and (max-width: 1024px) {
+
+    /* Position and sizing of burger button */
+    .bm-burger-button {
+        position: fixed;
+        width: 36px;
+        height: 30px;
+        left: 36px;
+        top: 36px;
+    }
+
+    /* Color/shape of burger icon bars */
+    .bm-burger-bars {
+        background: #373a47;
+    }
+
+    /* Position and sizing of clickable cross button */
+    .bm-cross-button {
+        height: 24px;
+        width: 24px;
+    }
+
+    /* Color/shape of close button cross */
+    .bm-cross {
+        background: #bdc3c7;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    .bm-menu-wrap {
+        width: 16.666666% !important;
+    }
+}
+
+/* General sidebar styles */
+.bm-menu {
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+    fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+    color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+
+.bm-menu-wrap .list-group-item {
+    border: none !important;
+    margin-bottom: 0 !important;
+    background-color: transparent;
+}
+
+.bm-menu-wrap .list-group-item:hover {
+    color: #2b59a8;
+}
+
+.bm-menu-wrap {
+    background: #eeeeee;
+    width: 266px;
+}
+
+
+/*styles for only desktop*/
+.mainHeader h1{
+    color: #2b59a8;
+    font-family: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.adminMod .jumbotron{
+    background-color: #ffffff;
+}
+
+.mainHeader .hdLong {
+    width: 50%;
+    margin: 20px auto 30px;
+}
+
+.mainHeader .hdSub {
+    border-top: 1px solid;
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+    height: auto;
+    color: #bbbbbb;
+    margin: 0 auto;
+}
+
+.hdSub span {
+    background-color: #fff;
+    padding: 0 10px;
+    position: relative;
+    top: -10px;
 }
