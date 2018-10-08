@@ -6,7 +6,7 @@ import { Redirect, Link } from "react-router-dom";
 
 import { makeData } from "../../../Utils";
 
-class WithdrawalsTable extends React.Component {
+class BuyCommissionsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -84,4 +84,4 @@ class WithdrawalsTable extends React.Component {
     }
 }
 
-export default WithdrawalsTable;
+export default BuyCommissionsTable;

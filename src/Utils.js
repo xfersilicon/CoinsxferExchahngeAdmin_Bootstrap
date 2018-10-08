@@ -12,23 +12,23 @@ const range = len => {
 const newPerson = () => {
     const statusChance = Math.random();
     return {
-        firstName: namor.generate({ words: 1, numbers: 0 }),
-        lastName: namor.generate({ words: 1, numbers: 0 }),
-        age: Math.floor(Math.random() * 30),
-        visits: Math.floor(Math.random() * 100),
-        progress: Math.floor(Math.random() * 100),
-        status:
+        TimeStamp: new Date().toLocaleString(),
+        Coin: namor.generate({ words: 1, numbers: 0 }),
+        Volume: Math.floor(Math.random() * 100),
+        Token: Math.floor(Math.random() * 100),
+        Price: Math.floor(Math.random() * 1000),
+        Total: Math.floor(Math.random() * 1000),
+        Type:
             statusChance > 0.66
-                ? "relationship"
-                : statusChance > 0.33 ? "complicated" : "single"
+                ? "Bought"
+                : "Sold"
     };
 };
 
 export function makeData(len = 40) {
     return range(len).map(d => {
         return {
-            ...newPerson(),
-            children: range(10).map(newPerson)
+            ...newPerson()
         };
     });
 }

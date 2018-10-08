@@ -33,10 +33,12 @@ class Header extends Component {
         return (
             <Navbar className="headerContainer">
                 {/* <NavbarBrand tag={Link} to="/">Coinsxfer</NavbarBrand> */}
-                <NavbarBrand tag={RRNavLink} to={this.props.childProps.isAuthenticated ? "/dashboard" : "/login"} className="headerLogo">
+                <NavbarBrand tag={Link} to={this.props.childProps.isAuthenticated ? "/dashboard" : "/login"} className="headerLogo">
                     Hello Admin
                 </NavbarBrand>
-
+                <NavbarBrand tag={Link} to={this.props.childProps.isAuthenticated ? "/dashboard" : "/login"} >
+                    <FontAwesomeIcon icon="user" size="sm" className="dashIcon"/>
+                </NavbarBrand>
             </Navbar>
         );
     }

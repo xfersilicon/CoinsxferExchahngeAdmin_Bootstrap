@@ -1362,15 +1362,17 @@ input[type="submit"] {
 .headerContainer{
     border-bottom: 1px solid #2859a8;
     background: #2859a8;
-    margin-left: -6px;
+    /*margin-left: -7px;*/
+    padding-right: 15px;
 }
 
-.headerContainer a{
+.headerContainer a, .headerContainer a:hover{
     color: #ffffff;
 }
 
 .list-group {
     cursor: pointer !important;
+    display: flex !important;
 }
 .landingContainer{
     /*margin:0 -15px;*/
@@ -1441,7 +1443,7 @@ input[type="submit"] {
     color: #2b59a8 !important;
     font-size: 16px !important;
     font-weight: 500 !important;
-    width: 115px !important;
+    min-width: 115px !important;
     height: 45px !important;
     padding-top:10px !important;
 }
@@ -1459,7 +1461,7 @@ input[type="submit"] {
 }
 
 .whtBtn + .whtBtn, .prmBtn + .prmBtn {
-    margin-left: 2px;
+    margin-left: 12px;
 }
 
 .homeBtn .whtBtn:nth-child(1){
@@ -1647,20 +1649,30 @@ input[type=date], .css-1492t68{
 
 #page-wrap {
     text-align: center;
-
-    /* Prevent sidebar from showing a scrollbar on page */
-    overflow: auto;
+    margin-left: -7px;
 }
 
-/* Individual item */
-.bm-item {
-    display: inline-block;
+/*#page-wrap .container {*/
+    /*margin-left: 55px;*/
+/*}*/
 
-    /* Our sidebar item styling */
-    text-decoration: none;
+/* Individual item */
+.bm-item .list-group-item {
+    display: inline-block;
     margin-bottom: 10px;
     color: #252525;
-    transition: color 0.2s;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: "Raleway", "Helvetica", "Arial", sans-serif;
+    position: relative;
+    letter-spacing: 1px;
+    color: #252525;
+    /* text-transform: uppercase; */
+    line-height: normal;
+}
+
+.bm-item-list img {
+    margin-bottom: 20px;
 }
 
 /* Change color on hover */
@@ -1668,39 +1680,33 @@ input[type=date], .css-1492t68{
 
 /* The rest copied directly from react-burger-menu docs */
 
-@media only screen and (max-width: 1024px) {
+/*@media only screen and (max-width: 1024px) {*/
 
-    /* Position and sizing of burger button */
-    .bm-burger-button {
-        position: fixed;
-        width: 36px;
-        height: 30px;
-        left: 36px;
-        top: 36px;
-    }
+    /*!* Position and sizing of burger button *!*/
+    /*.bm-burger-button {*/
+        /*position: fixed;*/
+        /*width: 36px;*/
+        /*height: 30px;*/
+        /*left: 36px;*/
+        /*top: 36px;*/
+    /*}*/
 
-    /* Color/shape of burger icon bars */
-    .bm-burger-bars {
-        background: #373a47;
-    }
+    /*!* Color/shape of burger icon bars *!*/
+    /*.bm-burger-bars {*/
+        /*background: #373a47;*/
+    /*}*/
 
-    /* Position and sizing of clickable cross button */
-    .bm-cross-button {
-        height: 24px;
-        width: 24px;
-    }
+    /*!* Position and sizing of clickable cross button *!*/
+    /*.bm-cross-button {*/
+        /*height: 24px;*/
+        /*width: 24px;*/
+    /*}*/
 
-    /* Color/shape of close button cross */
-    .bm-cross {
-        background: #bdc3c7;
-    }
-}
-
-@media only screen and (min-width: 1024px){
-    .bm-menu-wrap {
-        width: 16.666666% !important;
-    }
-}
+    /*!* Color/shape of close button cross *!*/
+    /*.bm-cross {*/
+        /*background: #bdc3c7;*/
+    /*}*/
+/*}*/
 
 /* General sidebar styles */
 .bm-menu {
@@ -1709,9 +1715,9 @@ input[type=date], .css-1492t68{
 }
 
 /* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-    fill: #373a47;
-}
+/*.bm-morph-shape {*/
+    /*fill: #373a47;*/
+/*}*/
 
 /* Wrapper for item list */
 .bm-item-list {
@@ -1726,7 +1732,6 @@ input[type=date], .css-1492t68{
 
 .bm-menu-wrap .list-group-item {
     border: none !important;
-    margin-bottom: 0 !important;
     background-color: transparent;
 }
 
@@ -1736,7 +1741,7 @@ input[type=date], .css-1492t68{
 
 .bm-menu-wrap {
     background: #eeeeee;
-    width: 266px;
+    width: 25% !important;
 }
 
 
@@ -1748,8 +1753,17 @@ input[type=date], .css-1492t68{
     letter-spacing: 1px;
 }
 
+.adminMod {
+    height: 99vh;
+    margin-bottom: 50px;
+}
+
 .adminMod .jumbotron{
     background-color: #ffffff;
+}
+
+.adminMod .card-body {
+    padding: 0;
 }
 
 .mainHeader .hdLong {
@@ -1772,4 +1786,66 @@ input[type=date], .css-1492t68{
     padding: 0 10px;
     position: relative;
     top: -10px;
+}
+
+.adminMod .iconContent {
+    position: absolute;
+    margin-left: 30px;
+}
+
+.adminMod .dashIcon {
+    /* margin-left: 80px; */
+    color: #8888;
+    /* float: left; */
+}
+
+.adminMod h3 {
+    color: #2b59a8;
+    font-weight: 700;
+    font-size: 18px;
+    position: absolute;
+    margin: 0 12px 4px 60px;
+}
+
+.adminMod p {
+    position: absolute;
+    margin: 21px 12px 4px 60px;
+    line-height: 1.6;
+    font-size: 14px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+
+
+/*Table Styles*/
+.tabHd {
+    background-color: rgb(40, 89, 168) !important;
+    color: rgb(255, 255, 255);
+    text-align: left;
+}
+
+
+/* Advanced Search Page Styles*/
+.searchTransaction label{
+    float: left;
+}
+
+
+/* Refactor again*/
+.container {
+    margin-bottom: 100px;
+    height: 99vh;
+}
+
+.label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+.css-1492t68 {
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #6c757d;
 }

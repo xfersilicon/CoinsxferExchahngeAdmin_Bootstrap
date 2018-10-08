@@ -2,52 +2,54 @@ import React, {Component, Fragment} from "react";
 import { slide as Menu } from "react-burger-menu";
 import Collapsible from 'react-collapsible';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Collapse } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Collapse, Col } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import _ from 'lodash';
 // import { ListGroup, ListGroupItem, Collapse, Button, Nav, NavItem, NavLink, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 
 const mql = window.matchMedia(`(min-width: 800px)`);
 
 var tree = [
     {
-        text: "Dashboard"
+        text: "dashboard"
     },
     {
-        text: "Customers Info"
+        text: "customers info"
     },
     {
-        text: "Advanced Search"
+        text: "advanced search"
     },
 
     {
-        text: "Super Admin",
+        text: "super admin",
         nodes: [
             {
-                text: "Create a user",
+                text: "create user",
             },
             {
-                text: "Set user rights"
+                text: "set user rights"
             }
         ]
     },
 
     {
-        text: "Commissions Settings",
+        text: "commissions settings",
     },
 
     {
-        text: "Transfers",
+        text: "transfers",
         nodes: [
             {
-                text: "Withdrawals",
+                text: "withdrawals",
             },
             {
-                text: "Deposits"
+                text: "deposits"
             }
         ]
     },
 
     {
-        text: "Fiat Wallet"
+        text: "fiat wallet"
     },
 ];
 
@@ -64,19 +66,25 @@ export default class Sidebar extends Component {
 	}
 
     toggle = event => {
-        const id = event.currentTarget.getAttribute('id');
-        this.setState(state => ({ [id]: !state[id] }));
+        console.log(event.currentTarget.tagName);
+        if(event.currentTarget.tagName === 'LI') {
+            const id = event.currentTarget.getAttribute('id');
+            this.setState(state => ({ [id]: !state[id] }));
+        }  
     }
     mapper = (nodes, parentId, lvl) => {
         return nodes.map((node, index) => {
             const id = `${node.text}-${parentId ? parentId : 'top'}`.replace(/[^a-zA-Z0-9-_]/g, '');
             const item = <React.Fragment>
-                            <ListGroupItem style={{ zIndex: 0 }} className={`${parentId ? `rounded-0 ${lvl ? 'border-bottom-0' : ''}` : ''}`} id={id} onClick={this.toggle}>
+                            <ListGroupItem style={{ zIndex: 0 }} to={node.nodes ? '' : `/${_.camelCase(node.text)}`} 
+                                tag={node.nodes ? ListGroupItem : Link}
+                                //tag={ListGroupItem}
+                                className={`${parentId ? `rounded-0 ${lvl ? 'border-bottom-0' : ''}` : ''}`} id={id} onClick={this.toggle}>
                                 {
-                                    <div style={{ paddingLeft: `${25 * lvl}px` }}>
-                                        {node.text}
-                                        {/*{node.nodes && <div style={{ float: 'right' }} >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</div>}*/}
-                                        {node.nodes && <Button style={{ float: 'right' }} color="link" >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</Button>}
+                                    <div style={{ paddingLeft: `${25 * lvl}px`, textTransform: 'capitalize' }}>
+                                        {_.upperCase(node.text)}
+                                        {node.nodes && <div style={{ float: 'right' }} >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</div>}
+                                        {/* {node.nodes && <Button style={{ float: 'right' }} color="link" >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</Button>} */}
                                     </div>
                                 }
                             </ListGroupItem>
@@ -110,13 +118,15 @@ export default class Sidebar extends Component {
 	}
 	render(props) {
 		return (
+		    <Fragment>
                 <Menu isOpen={this.state.menuIsOpen} noOverlay
-                      disableCloseOnEsc disableOverlayClick={true}>
+                      disableCloseOnEsc disableOverlayClick={true} >
                     <img src={`${process.env.PUBLIC_URL}/assets/side-logo-light.png`} alt="logoImage"/>
                     <ListGroup>
                         {this.mapper(tree)}
                     </ListGroup>
                 </Menu>
+            </Fragment>
 		);
 	}
 }
