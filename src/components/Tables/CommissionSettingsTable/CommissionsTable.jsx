@@ -2,32 +2,26 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { Redirect, Link } from "react-router-dom";
 
-import { makeData } from "../../../Utils";
-
-class BuyCommissionsTable extends React.Component {
-    constructor(props) {
+class CommissionsTable extends React.Component {
+    constructor(props){
         super(props);
-        this.state = {
-            data: makeData()
-        };
-        this.renderEditable = this.renderEditable.bind(this);
-        this.renderInput = this.renderInput.bind(this);
     }
-    renderEditable(cellInfo) {
+
+    renderEditable = (cellInfo) => {
         return (
             <input type="date" />
         );
     }
-    renderInput(cellInfo) {
+    renderInput = (cellInfo) => {
         return (
-            <input type="text" />
+            <input type="text" placeholder="Enter"/>
         );
     }
 
+
     render() {
-        const { data } = this.state;
+        const { data } = this.props;
         return (
             <ReactTable
                 data={data}
@@ -100,4 +94,4 @@ class BuyCommissionsTable extends React.Component {
     }
 }
 
-export default BuyCommissionsTable;
+export default CommissionsTable;

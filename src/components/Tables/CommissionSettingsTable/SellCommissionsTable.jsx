@@ -12,7 +12,21 @@ class SellCommissionsTable extends React.Component {
         this.state = {
             data: makeData()
         };
+        this.renderEditable = this.renderEditable.bind(this);
+        this.renderInput = this.renderInput.bind(this);
     }
+
+    renderEditable(cellInfo) {
+        return (
+            <input type="date" />
+        );
+    }
+    renderInput(cellInfo) {
+        return (
+            <input type="text" placeholder="Enter"/>
+        );
+    }
+
 
     render() {
         const { data } = this.state;
@@ -53,19 +67,23 @@ class SellCommissionsTable extends React.Component {
                     },
                     {
                         Header: "From Date",
-                        accessor: "TimeStamp"
+                        accessor: "TimeStamp",
+                        Cell: this.renderEditable
                     },
                     {
                         Header: "To Date",
-                        accessor: "TimeStamp"
+                        accessor: "TimeStamp",
+                        Cell: this.renderEditable
                     },
                     {
                         Header: "Commission",
-                        accessor: "Price"
+                        accessor: "Price",
+                        Cell: this.renderInput
                     },
                     {
                         Header: "Volume",
-                        accessor: "Volume"
+                        accessor: "Volume",
+                        Cell: this.renderInput
                     },
                     {
                         Header: "Default Commission",
