@@ -7,7 +7,6 @@ import CardLayout from '../../layouts/cardLayout';
 import Select from 'react-select';
 import WithdrawalsTable from '../Tables/TransfersTables/WithdrawalsTable';
 
-
 const coinTypeOptions = [
     { value: 'BTC', label: 'BTC'},
     { value: 'XRP', label: 'XRP' },

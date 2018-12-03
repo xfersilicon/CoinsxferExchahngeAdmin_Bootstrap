@@ -43,8 +43,7 @@ class SearchResults extends Component {
                             </Col>
                         </FormGroup>
                         <div>
-                            {/* Place Icons before button text */}
-                            <Button className="whtBtn" media="print"><FontAwesomeIcon icon="print" size="md"/> Print</Button>
+                            <Button className="whtBtn"><FontAwesomeIcon icon="print" size="md"/> Print</Button>
                             <Button className="whtBtn"><FontAwesomeIcon icon="print" size="md"/> Search Again</Button>
                         </div>
                     </Form>
