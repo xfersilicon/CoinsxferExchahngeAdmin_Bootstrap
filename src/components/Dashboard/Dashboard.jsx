@@ -6,9 +6,25 @@ import BuyOrders from "./BuyOrders";
 import TotalRegisteredUsersTable from "../Tables/DashboardTables/TotalRegisteredUsersTable";
 import MainHeader from "../MainHeader/MainHeader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchGetData } from "../../Api/ApiCalls";
+import config from '../../config/config';
 
 class Dashboard extends Component {
+    state = {
+        data: null,   
+    }
+
+    async componentDidMount() {
+        const url = `${config.user}/Dashboard/GetDashboardDetail`;
+        let response = await fetchGetData(url, null);
+        // this.setState({
+        //     data: response.data
+        // })
+        //console.log("ertyui");
+    }
+
     render() {
+        const {data} = this.state;
         return (
             <div className="adminMod">
                     <MainHeader heading="dashboard" subHeading="users"/>
@@ -18,14 +34,14 @@ class Dashboard extends Component {
                             <FontAwesomeIcon icon="user" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Total Registered Users</h3>
-                        <p>43Users</p>
+                        <p>{10}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">
                             <FontAwesomeIcon icon="arrow-right" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Sell Orders</h3>
-                        <p><span>62</span>Users</p>
+                        <p>{10}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">

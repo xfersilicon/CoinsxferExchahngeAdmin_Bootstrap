@@ -13,24 +13,29 @@ import Withdrawals from "../components/Transfers/Withdrawals";
 import Deposits from "../components/Transfers/Deposits";
 import FiatWallet from "../components/FiatWallet/FiatWallet";
 import KycSearchResults from "../components/KycSearchResults/KycSearchResults";
+import Login from "../components/Login/Login";
 
-import AppliedRoute from './AppliedRoutes/AppliedRoutes'
+import AuthenticatedRoute from "./AuthenticatedRoutes/AuthenticatedRoutes.jsx";
+import UnauthenticatedRoute from "./UnauthenticatedRoutes/UnauthenticatedRoutes";
+
+
 
 export default ({ childProps }) => {
     return (
         <Switch>
-            <AppliedRoute path='/dashboard' component={Dashboard} />
-            <AppliedRoute path='/customersInfo' component={CustomersInfo} />
-            <AppliedRoute path='/advancedSearch' component={AdvancedSearch} />
-            <AppliedRoute path='/searchResults' component={SearchResults} />
-            <AppliedRoute path='/createUser' component={CreateUser} />
+            <UnauthenticatedRoute exact path='/' component={Login} props={childProps}/>
+            <AuthenticatedRoute exact path='/dashboard' component={Dashboard} props={childProps}/>
+            <AuthenticatedRoute exact path='/customersInfo' component={CustomersInfo} props={childProps}/>
+            <AuthenticatedRoute exact path='/advancedSearch' component={AdvancedSearch} props={childProps}/>
+            <AuthenticatedRoute exact path='/searchResults' component={SearchResults} props={childProps}/>
+            <AuthenticatedRoute exact path='/createUser' component={CreateUser} props={childProps}/>
             {/* <AppliedRoute path='/addNewUser' component={AddNewUser} /> change this to AdminUsersList */}
-            <AppliedRoute path='/setUserRights' component={SetUserRights} />
-            <AppliedRoute path='/commissionsSettings' component={CommissionSettings} />
-            <AppliedRoute path='/deposits' component={Deposits} />
-            <AppliedRoute path='/withdrawals' component={Withdrawals} />
-            <AppliedRoute path='/fiatWallet' component={FiatWallet} />
-            <AppliedRoute path='/kycSearchResults' component={KycSearchResults} />
+            <AuthenticatedRoute exact path='/setUserRights' component={SetUserRights} props={childProps}/>
+            <AuthenticatedRoute exact path='/commissionsSettings' component={CommissionSettings} props={childProps}/>
+            <AuthenticatedRoute exact path='/deposits' component={Deposits} props={childProps}/>
+            <AuthenticatedRoute exact path='/withdrawals' component={Withdrawals}props={childProps} />
+            <AuthenticatedRoute exact path='/fiatWallet' component={FiatWallet} props={childProps}/>
+            <AuthenticatedRoute exact path='/kycSearchResults' component={KycSearchResults} props={childProps}/>
         </Switch>
     );
 };
