@@ -7,7 +7,6 @@ import CardLayout from '../../layouts/cardLayout';
 import Select from 'react-select';
 import WithdrawalsTable from '../Tables/TransfersTables/WithdrawalsTable';
 
-
 const coinTypeOptions = [
     { value: 'BTC', label: 'BTC'},
     { value: 'XRP', label: 'XRP' },
@@ -46,17 +45,15 @@ class Withdrawals extends Component {
                             </Col>
                         </FormGroup>
                         </Col>
-                        <FormGroup row style={{float:"right"}} >
-                            <Col lg={3}>
-                                <Label for="searchInputLabel">Search</Label>
-                            </Col>
-                            <Col lg={7}>
+                        <FormGroup row style={{float:"right"}}>
+                            <Label for="searchInputLabel" sm={2}>Search</Label>
+                            <Col sm={8}>
                                 <Input type="text" name="searchInput" id="searchInput" placeholder="" />
                             </Col>
                         </FormGroup>
                     </Form>
                 <div>
-                    <CardLayout Header="Withdrawals" Body={<WithdrawalsTable />} />
+                    <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable />} />
                 </div>
             </div>
         );

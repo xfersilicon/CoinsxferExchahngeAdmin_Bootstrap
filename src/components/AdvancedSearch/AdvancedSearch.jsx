@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainHeader from "../MainHeader/MainHeader";
 import Select from 'react-select';
 
@@ -53,7 +54,6 @@ export default class AdvancedSearch extends React.Component {
                             <Col lg="12">
                                 <Label for="coinPairLabel">Coin Pair</Label>
                             </Col>
-                            {/* Align drop down values to left  */}
                             <Col lg="12">
                                 <Select
                                     label= "Coin Pair"
@@ -68,8 +68,6 @@ export default class AdvancedSearch extends React.Component {
                             <Col lg="12">
                                 <Label for="transactionTypeLabel">Transaction Type</Label>
                             </Col>
-
-                            {/* Align drop down values to left  */}
                             <Col lg="12">
                                 <Select
                                     value={selectedTransactionType}
@@ -111,8 +109,6 @@ export default class AdvancedSearch extends React.Component {
                             <Col lg="12">
                                 <Label for="fileTypeLabel">File Type</Label>
                             </Col>
-
-                            {/* Align drop down values to left  */}
                             <Col lg="12">
                                 <Select
                                     value={selectedFileType}
@@ -122,7 +118,7 @@ export default class AdvancedSearch extends React.Component {
                                 />
                                 </Col>
                         </FormGroup>
-                        <Button className="whtBtn" tag={Link} to="/searchResults">Search</Button>
+                        <Button className="whtBtn" tag={Link} to="/searchResults"><FontAwesomeIcon icon="print" size="md"/> Search</Button>
                     </Form>
                 </Col>
             </div>

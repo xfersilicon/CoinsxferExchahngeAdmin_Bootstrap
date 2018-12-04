@@ -25,7 +25,6 @@ class CustomersInfo extends Component {
                         </Col>
                     </FormGroup>
                 </Form>
-                {/*<Row style={{ "float": "right", "marginBottom": "20px" }}>Search<input /></Row>*/}
                 <CardLayout Header="Users" iconName="user" Body={<CustomerManagementUsersTable />} />
             </div>
         );

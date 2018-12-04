@@ -32,7 +32,6 @@ class Header extends Component {
     render() {
         return (
             <Navbar className="headerContainer">
-                {/* <NavbarBrand tag={Link} to="/">Coinsxfer</NavbarBrand> */}
                 <NavbarBrand tag={Link} to={this.props.childProps.isAuthenticated ? "/dashboard" : "/login"} className="headerLogo">
                     Hello Admin
                 </NavbarBrand>

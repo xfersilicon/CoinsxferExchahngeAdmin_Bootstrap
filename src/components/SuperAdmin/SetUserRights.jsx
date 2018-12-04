@@ -42,7 +42,6 @@ class SetUserRights extends React.Component {
                     <Form className="searchTransaction">
                         <FormGroup>
                             <Label for="userName" hidden>User Name</Label>
-                            {/* Align drop down values to left */}
                             <Select
                                 value={selectedUser}
                                 onChange={this.handleUserChange}
@@ -52,7 +51,6 @@ class SetUserRights extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label for="superAdminLabel" hidden>Super Admin</Label>
-                            {/* Align drop down values to left */}
                             <Select
                                 value={userTypeselectedOption}
                                 onChange={this.handleUserTypeChange}

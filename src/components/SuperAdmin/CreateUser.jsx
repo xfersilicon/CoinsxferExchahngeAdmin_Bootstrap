@@ -50,11 +50,8 @@ export default class CreateUser extends React.Component {
                             <Input type="password" name="confirmPassword" id="confirmPassword"
                                    placeholder="Confirm Password"/>
                         </FormGroup>
-
-                        {/* Implement React Select */}
                         <FormGroup>
                             <Label for="superAdminLabel" hidden>Super Admin</Label>
-                            {/* Align drop down values to left */}
                             <Select
                                 value={userTypeSelectedOption}
                                 onChange={this.handleUserTypeChange}
@@ -62,7 +59,6 @@ export default class CreateUser extends React.Component {
                                 placeholder="Admin Type"
                             />
                         </FormGroup>
-                        {/* Implement React Select */}
                         <Button className="whtBtn" tag={Link} to="/addNewUser">Add New User</Button>
                     </Form>
                 </Col>

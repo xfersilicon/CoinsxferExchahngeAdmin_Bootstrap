@@ -46,17 +46,15 @@ class Deposits extends Component {
                             </Col>
                         </FormGroup>
                     </Col>
-                    <FormGroup row style={{float:"right"}} >
-                        <Col lg={3}>
-                            <Label for="searchInputLabel">Search</Label>
-                        </Col>
-                        <Col lg={7}>
+                    <FormGroup row style={{float:"right"}}>
+                        <Label for="searchInputLabel" sm={2}>Search</Label>
+                        <Col sm={8}>
                             <Input type="text" name="searchInput" id="searchInput" placeholder="" />
                         </Col>
                     </FormGroup>
                 </Form>
                 <div>
-                    <CardLayout Header="Deposits" Body={<DepositTable />} />
+                    <CardLayout Header="Deposits" iconName="user" Body={<DepositTable />} />
                 </div>
             </div>
         );
