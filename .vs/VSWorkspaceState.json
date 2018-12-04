@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\CommissionSettings",
+    "\\src\\components\\Dashboard",
+    "\\src\\components\\FiatWallet",
+    "\\src\\components\\MainHeader",
+    "\\src\\components\\Sidebar",
+    "\\src\\components\\Tables",
+    "\\src\\components\\Tables\\AdvancedSearch"
+  ],
+  "SelectedNode": "\\src\\components\\FiatWallet\\FiatWallet.jsx",
+  "PreviewInSolutionExplorer": false
+}

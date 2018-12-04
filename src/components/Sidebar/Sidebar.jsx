@@ -1,7 +1,57 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import { slide as Menu } from "react-burger-menu";
+import Collapsible from 'react-collapsible';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Collapse, Col } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import _ from 'lodash';
+// import { ListGroup, ListGroupItem, Collapse, Button, Nav, NavItem, NavLink, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
 
 const mql = window.matchMedia(`(min-width: 800px)`);
+
+var tree = [
+    {
+        text: "dashboard"
+    },
+    {
+        text: "customers info"
+    },
+    {
+        text: "advanced search"
+    },
+
+    {
+        text: "super admin",
+        nodes: [
+            {
+                text: "create user",
+            },
+            {
+                text: "set user rights"
+            }
+        ]
+    },
+
+    {
+        text: "commissions settings",
+    },
+
+    {
+        text: "transfers",
+        nodes: [
+            {
+                text: "withdrawals",
+            },
+            {
+                text: "deposits"
+            }
+        ]
+    },
+
+    {
+        text: "fiat wallet"
+    },
+];
 
 export default class Sidebar extends Component {
 	constructor(props) {
@@ -12,7 +62,42 @@ export default class Sidebar extends Component {
 			menuIsOpen: false //Menu bugs out if set to true initial on push mode
 		}
 		this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.toggle = this.toggle.bind(this);
 	}
+
+    toggle = event => {
+        console.log(event.currentTarget.tagName);
+        if(event.currentTarget.tagName === 'LI') {
+            const id = event.currentTarget.getAttribute('id');
+            this.setState(state => ({ [id]: !state[id] }));
+        }  
+    }
+    mapper = (nodes, parentId, lvl) => {
+        return nodes.map((node, index) => {
+            const id = `${node.text}-${parentId ? parentId : 'top'}`.replace(/[^a-zA-Z0-9-_]/g, '');
+            const item = <React.Fragment>
+                            <ListGroupItem style={{ zIndex: 0 }} to={node.nodes ? '' : `/${_.camelCase(node.text)}`} 
+                                tag={node.nodes ? ListGroupItem : Link}
+                                //tag={ListGroupItem}
+                                className={`${parentId ? `rounded-0 ${lvl ? 'border-bottom-0' : ''}` : ''}`} id={id} onClick={this.toggle}>
+                                {
+                                    <div style={{ paddingLeft: `${25 * lvl}px`, textTransform: 'capitalize' }}>
+                                        {_.upperCase(node.text)}
+                                        {node.nodes && <div style={{ float: 'right' }} >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</div>}
+                                        {/* {node.nodes && <Button style={{ float: 'right' }} color="link" >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</Button>} */}
+                                    </div>
+                                }
+                            </ListGroupItem>
+                            {
+                                node.nodes &&
+                                    <Collapse isOpen={this.state[id]}>
+                                        {this.mapper(node.nodes, id, (lvl || 0) + 1)}
+                                    </Collapse>}
+                            </React.Fragment>
+
+            return item;
+        });
+    }
 
 	componentDidMount() {
 		//Using componentDidMount because the menu bugs if setting isOpen = true before mounted
@@ -31,19 +116,17 @@ export default class Sidebar extends Component {
 		console.log("width below 800px", !this.state.mql.matches);
 		this.setState({ menuIsOpen: this.state.mql.matches });
 	}
-
 	render(props) {
 		return (
-			<div id="outer-container">
-				{/* Probably better off using your own button for menu open with this method (customBurgerIcon={false}) */}
-				<Menu pageWrapId={"page-wrap"} outerContainerId={"outer-container"} isOpen={this.state.menuIsOpen} noOverlay
-                    disableCloseOnEsc disableOverlayClick={true}> 
-					<a id="home" className="menu-item" href="/">Home</a>
-					<a id="about" className="menu-item" href="/about">About</a>
-					<a id="contact" className="menu-item" href="/contact">Contact</a>
-					<a className="menu-item--small" href="">Settings</a>
-				</Menu>
-			</div>
+		    <Fragment>
+                <Menu isOpen={this.state.menuIsOpen} noOverlay
+                      disableCloseOnEsc disableOverlayClick={true} >
+                    <img src={`${process.env.PUBLIC_URL}/assets/side-logo-light.png`} alt="logoImage"/>
+                    <ListGroup>
+                        {this.mapper(tree)}
+                    </ListGroup>
+                </Menu>
+            </Fragment>
 		);
 	}
 }

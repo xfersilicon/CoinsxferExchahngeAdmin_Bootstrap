@@ -3,10 +3,10 @@ import Routes from './routes/index';
 import Layout from "./layouts/Layout";
 import {withRouter} from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard} from '@fortawesome/free-solid-svg-icons'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faUser);
+library.add(faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard);
 
 class App extends Component {
   constructor(props) {

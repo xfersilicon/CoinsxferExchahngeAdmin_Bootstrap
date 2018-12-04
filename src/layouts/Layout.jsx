@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import { Row, Col } from 'reactstrap';
+import Sidebars from '../components/Sidebar/Sidebar';
+import Dashboard from '../components/Dashboard/Dashboard';
+import { Row, Col, Container } from 'reactstrap';
+import CustomersInfo from '../components/CustomersInfo/CustomersInfo';
 
 class Layout extends Component {
     render() {
         return (
-            <div>
+            <Fragment>
                 <Row>
-                    <Col xs="2 " sm="4" md="4" lg="2"><Sidebar/></Col>
-                    <Col xs="10 " sm="8" md="8" lg="10" id="page-wrap">
-                        <Row><Header childProps={this.props.childProps} /></Row>
-                        <Row>Main Content</Row>
+                    <Col lg="3">
+                        <Sidebars/>
+                    </Col>
+                    <Col lg="9" id="page-wrap">
+                        <Header childProps={this.props.childProps} />
+                        <Container>
+                            {this.props.children}
+                        </Container>
                     </Col>
                 </Row>
-            </div>
+            </Fragment>
         )
     }
 }
