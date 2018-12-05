@@ -66,7 +66,7 @@ export default class Sidebar extends Component {
 	}
 
     toggle = event => {
-        console.log(event.currentTarget.tagName);
+        //console.log(event.currentTarget.tagName);
         if(event.currentTarget.tagName === 'LI') {
             const id = event.currentTarget.getAttribute('id');
             this.setState(state => ({ [id]: !state[id] }));

@@ -10,10 +10,11 @@ class Layout extends Component {
         return (
             <Fragment>
                 <Row>
-                    <Col lg="3">
+                    {this.props.childProps.isAuthenticated && <Col lg="3">
                         <Sidebars/>
-                    </Col>
-                    <Col lg="9" id="page-wrap">
+                    </Col>}
+                    
+                    <Col lg={this.props.childProps.isAuthenticated ? 9 : 12} id="page-wrap">
                         <Header childProps={this.props.childProps} />
                         <Container>
                             {this.props.children}
