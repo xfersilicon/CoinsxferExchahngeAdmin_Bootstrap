@@ -24,8 +24,16 @@ export default {
     routes: {
     },
 
+
+    urls: {
+        customerInfo :'/CustomersInfo/FetchCustomerInfo',
+        dashboard: "/Dashboard/GetDashboardDetail",
+        advancedSearch: "/AdvancedSearch/FetchAdvancedSearch ",
+    },
+
     /* visible records in tables */
     //
+    searchResultsPerPage: 20,
     // buyTableRecordsPerPage: 50,
     // sellTableRecordsPerPage: 50,
     // orderHistoryRecordsPerPage: 50,

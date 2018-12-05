@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainHeader from "../MainHeader/MainHeader";
 import Select from 'react-select';
 
+// Defining Coir Pair Selection
 const coinPairOptions = [
-    { value: 'BTC-INR', label: 'BTC-INR'},
-    { value: 'XRP-INR', label: 'XRP-INR' },
-    { value: 'ETH-INR', label: 'ETH-INR' }
+    { value: 'ETH-BTC', label: 'ETH-BTC' },
+    { value: 'XRP-BTC', label: 'XRP-BTC' }
 ];
 
+// Defining Transaction Type Options for Selection
 const transactionTypeOptions = [
     { value: 'buy', label: 'Buy' },
     { value: 'sell', label: 'Sell' },
@@ -18,6 +19,7 @@ const transactionTypeOptions = [
     { value: 'withdraw', label: 'Withdrawal' }
 ]
 
+// Defining Options for viewing the result set 
 const fileTypeOptions = [
     { value: 'pdf', label: 'PDF' },
     { value: 'doc', label: 'JPEG' }

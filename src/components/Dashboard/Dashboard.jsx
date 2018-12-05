@@ -15,11 +15,13 @@ class Dashboard extends Component {
     }
 
     async componentDidMount() {
-        const url = `${config.user}/Dashboard/GetDashboardDetail`;
+        const url = `${config.user}`+ config.urls.dashboard;
         let response = await fetchGetData(url, null);
-        // this.setState({
-        //     data: response.data
-        // })
+
+        console.log(response);
+        this.setState({
+            data: response
+        })     
         //console.log("ertyui");
     }
 
@@ -34,21 +36,21 @@ class Dashboard extends Component {
                             <FontAwesomeIcon icon="user" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Total Registered Users</h3>
-                        <p>{10}</p>
+                        <p>{data && data.totalRegisterUsers}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">
                             <FontAwesomeIcon icon="arrow-right" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Sell Orders</h3>
-                        <p>{10}</p>
+                        <p>{data && data.totalSellOrders}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">
                             <FontAwesomeIcon icon="arrow-left" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Buy Orders</h3>
-                        <p><span>58</span>Users</p>
+                        <p><span>{data && data.totalBuyOrders}</span>Users</p>
                     </Col>
                 </Row>
             </div>
