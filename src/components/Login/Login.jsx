@@ -56,7 +56,7 @@ class Login extends Component {
 
         if (this.state.showOtpInput) {
             this.fetchUserDetails().then(response => {
-                this.props.setCookie(response.data.accessToken);
+                //this.props.setCookie(response.data.accessToken);
                 this.toggleLoadingState(false);
                 this.saveUserInfoInSession(response.data);
             }).catch(error => {

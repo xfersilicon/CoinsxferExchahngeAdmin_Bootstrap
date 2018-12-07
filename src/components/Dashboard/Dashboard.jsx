@@ -6,7 +6,7 @@ import BuyOrders from "./BuyOrders";
 import TotalRegisteredUsersTable from "../Tables/DashboardTables/TotalRegisteredUsersTable";
 import MainHeader from "../MainHeader/MainHeader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchGetData } from "../../Api/ApiCalls";
+import { fetchDashboardDetails } from "../../Api/ApiCalls";
 import config from '../../config/config';
 
 class Dashboard extends Component {
@@ -15,13 +15,12 @@ class Dashboard extends Component {
     }
 
     async componentDidMount() {
-        const url = `${config.user}`+ config.urls.dashboard;
-        let response = await fetchGetData(url, null);
-
+        let response = await fetchDashboardDetails();
         console.log(response);
+        
         this.setState({
             data: response
-        })     
+        })
         //console.log("ertyui");
     }
 
@@ -50,7 +49,7 @@ class Dashboard extends Component {
                             <FontAwesomeIcon icon="arrow-left" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Buy Orders</h3>
-                        <p><span>{data && data.totalBuyOrders}</span>Users</p>
+                        <p>{data && data.totalBuyOrders}</p>
                     </Col>
                 </Row>
             </div>

@@ -33,7 +33,7 @@ export default {
 
     /* visible records in tables */
     //
-    searchResultsPerPage: 20,
+    searchResultsPerPage: 10,
     // buyTableRecordsPerPage: 50,
     // sellTableRecordsPerPage: 50,
     // orderHistoryRecordsPerPage: 50,
