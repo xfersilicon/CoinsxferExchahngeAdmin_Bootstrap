@@ -6,7 +6,7 @@ import BuyOrders from "./BuyOrders";
 import TotalRegisteredUsersTable from "../Tables/DashboardTables/TotalRegisteredUsersTable";
 import MainHeader from "../MainHeader/MainHeader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fetchGetData } from "../../Api/ApiCalls";
+import { fetchDashboardDetails } from "../../Api/ApiCalls";
 import config from '../../config/config';
 
 class Dashboard extends Component {
@@ -15,11 +15,12 @@ class Dashboard extends Component {
     }
 
     async componentDidMount() {
-        const url = `${config.user}/Dashboard/GetDashboardDetail`;
-        let response = await fetchGetData(url, null);
-        // this.setState({
-        //     data: response.data
-        // })
+        let response = await fetchDashboardDetails();
+        console.log(response);
+        
+        this.setState({
+            data: response
+        })
         //console.log("ertyui");
     }
 
@@ -34,21 +35,21 @@ class Dashboard extends Component {
                             <FontAwesomeIcon icon="user" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Total Registered Users</h3>
-                        <p>{10}</p>
+                        <p>{data && data.totalRegisterUsers}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">
                             <FontAwesomeIcon icon="arrow-right" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Sell Orders</h3>
-                        <p>{10}</p>
+                        <p>{data && data.totalSellOrders}</p>
                     </Col>
                     <Col lg={4}>
                         <div className="iconContent">
                             <FontAwesomeIcon icon="arrow-left" size="lg" className="dashIcon"/>
                         </div>
                         <h3>Buy Orders</h3>
-                        <p><span>58</span>Users</p>
+                        <p>{data && data.totalBuyOrders}</p>
                     </Col>
                 </Row>
             </div>

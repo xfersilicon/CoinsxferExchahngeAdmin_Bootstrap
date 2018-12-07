@@ -4,8 +4,10 @@ import { withCookies, Cookies } from 'react-cookie';
 import Layout from "./layouts/Layout";
 import {withRouter} from 'react-router-dom';
 import compose from 'compose-function';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard} from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard} from '@fortawesome/free-solid-svg-icons';
+import LoadingIndicator from './components/Utils/Loaders/LoadingIndicator';
+
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard);
@@ -17,25 +19,30 @@ class App extends Component {
     const { cookies } = props;
 
     this.state = {
+        isLoading: false,
         isAuthenticated: true,
         SessionID: cookies.get('SessionID') || null
     };
   }
 
-  setCookie = (token) => {
-    const { cookies } = this.props;
-    cookies.set('SessionID', token, { path: '/' });
-    this.setState({
-        SessionID: token
-    })
+//   setCookie = (token) => {
+//     const { cookies } = this.props;
+//     cookies.set('SessionID', token, { path: '/' });
+//     this.setState({
+//         SessionID: token
+//     })
 
-    console.log('====================================');
-    console.log("Cookies:", cookies.get('SessionID'));
-    console.log('====================================');
-}
+//     console.log('====================================');
+//     console.log("Cookies:", cookies.get('SessionID'));
+//     console.log('====================================');
+// }
 
   userHasAuthenticated = (authenticated) => {
     this.setState({ isAuthenticated: authenticated });
+  }
+
+  componentHasLoaded= (loaded) => {
+    this.setState({ isLoading: loaded });
   }
 
 //   handleLogout = event => {
@@ -92,6 +99,8 @@ class App extends Component {
 
   render() {
     const childProps = {
+      isLoading: this.state.isLoading,
+      componentHasLoaded: this.componentHasLoaded,
       isAuthenticated: this.state.isAuthenticated,
       handleLogout: this.handleLogout,
       userHasAuthenticated: this.userHasAuthenticated,
@@ -100,7 +109,7 @@ class App extends Component {
 
     return (
         <Layout childProps={childProps}>
-            <Routes childProps={childProps} />
+            {this.state.isLoading ? <LoadingIndicator /> : <Routes childProps={childProps} /> }
         </Layout>
     );
   }

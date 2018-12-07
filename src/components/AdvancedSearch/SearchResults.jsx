@@ -5,6 +5,7 @@ import SearchResultsTable from '../Tables/AdvancedSearch/SearchResultsTable';
 import CardLayout from '../../layouts/cardLayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
+import ReactToPrint from "react-to-print";
 
 const fileTypeOptions = [
     { value: 'pdf', label: 'PDF' },
@@ -26,7 +27,7 @@ class SearchResults extends Component {
         return (
             <div className="adminMod">
                 <MainHeader heading="search results" subHeading="results"/>
-                <CardLayout Header="Transactions" iconName="sticky-note" Body={<SearchResultsTable />} />
+                <CardLayout Header={this.props.state.selectedTransactionType.value+" Transactions ("+ this.props.state.selectedCoinPair.value+")"} iconName="sticky-note" Body={<SearchResultsTable searchData={this.props.state} selectedFileType={selectedFileType} ref={el => (this.componentRef = el)}/>} />
                 <Col lg={6} style={{left: "25%", marginTop: "30px"}}>
                     <Form className="searchTransaction">
                         <FormGroup row>
@@ -43,8 +44,8 @@ class SearchResults extends Component {
                             </Col>
                         </FormGroup>
                         <div>
-                            <Button className="whtBtn"><FontAwesomeIcon icon="print" size="md"/> Print</Button>
-                            <Button className="whtBtn"><FontAwesomeIcon icon="print" size="md"/> Search Again</Button>
+                        <ReactToPrint trigger={() => <Button className="whtBtn"><FontAwesomeIcon icon="print" size="md"/> Print</Button>} content={() => this.componentRef} />
+                            <Button className="whtBtn" onClick={this.props.showSearchResults}><FontAwesomeIcon icon="print" size="md"/> Search Again</Button>
                         </div>
                     </Form>
                 </Col>

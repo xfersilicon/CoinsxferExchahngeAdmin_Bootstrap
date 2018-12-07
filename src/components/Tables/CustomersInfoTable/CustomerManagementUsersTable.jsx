@@ -3,112 +3,153 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import {Redirect, Link} from "react-router-dom";
-import { fetchPostData } from "../../../Api/ApiCalls";
+import { Redirect, Link } from "react-router-dom";
+import { fetchCustomersInfo } from "../../../Api/ApiCalls";
 import config from '../../../config/config';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 
 class CustomerManagementUsersTable extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        data: []
-      };
+        super(props);
+        this.state = {
+            isLoading: true,
+            data: [],
+            searchResultPageCount: null,
+            // customeName: '',
+            // accountStatus: '',
+            // place: '',
+            // memberSince: '',
+            // tokensTraded: '',
+            // address: '',
+            // mobileNumber: '',
+            // memberType: '',
+            // kyc:''
+        };
     }
 
-    async componentDidMount() {
-        const url = `${config.user}/CustomersInfo/FetchAdvancedSearch`;
-        let response = await fetchPostData(url, null);
-        // this.setState({
-        //     data: response.data
-        // })
-        //console.log("ertyui");
+    // async componentDidMount() {
+    //     let response = await fetchCustomersInfo();
+    //     this.setState({
+    //         data: response
+    //     })
+    //     //console.log("ertyui");
+    // }
+
+    getData = async (state, instance) => {
+        //console.log(state);
+        this.setState({
+            isLoading: false,
+        });
+       const url = `${config.user}` + config.urls.customerInfo;
+        const paginationObj = {
+            Skip: (state.page) * state.pageSize,
+            Take: state.pageSize
+        }
+        let response = await fetchCustomersInfo(paginationObj);
+        console.log(response);
+        this.setState({
+            data: response.data,
+            searchResultPageCount: response.pageCount
+        })
     }
 
     render() {
-      const { data } = this.state;
+        const { data, isLoading, searchResultPageCount } = this.state;
         return (
-                <ReactTable
-                    data={data}
-                    style={{
-                        lineHeight: "0.8em",
-                        textAlign: "center",
-                        border: "none"
-                    }}
+            <ReactTable
+                data={data}
+                style={{
+                    lineHeight: "0.8em",
+                    textAlign: "center",
+                    border: "none"
+                }}
 
-                    //change to styles to css file wherever react-table is used
-                    getTheadProps={() => {
-                        return {
-                            style: {
-                                fontWeight: "bold",
-                                //whiteSpace: "wrap"
-                            }
+                //change to styles to css file wherever react-table is used
+                getTheadProps={() => {
+                    return {
+                        style: {
+                            fontWeight: "bold",
+                            //whiteSpace: "wrap"
                         }
-                    }}
-                    getTheadThProps={() => {
-                        return {
-                            style: {
-                                whiteSpace: "normal",
-                                verticalAlign: 'bottom',
-                                borderBottom: '2px solid #ddd'
-                            }
+                    }
+                }}
+                getTheadThProps={() => {
+                    return {
+                        style: {
+                            whiteSpace: "normal",
+                            verticalAlign: 'bottom',
+                            borderBottom: '2px solid #ddd'
                         }
-                    }}
+                    }
+                }}
 
-                    //until above line
+                //until above line
 
-                    columns={[                                 
-                            {
-                            Header: "Customer Name",
-                            accessor: "TimeStamp",
-                            },
-                            {
-                            Header: "Account Status",
-                            accessor: "Coin"
-                            },
-                            {
-                            Header: "Place",
-                            accessor: "Volume"
-                            },
-                            {
-                            Header: "Member Since",
-                            accessor: "Token"
-                            },
-                            {
-                            Header: "Tokens Traded",
-                            accessor: "Price"
-                            },
-                            {
-                            Header: "Address",
-                            accessor: "Total"
-                            },
-                            {
-                            Header: "Mobile Number",
-                            accessor: "Volume"
-                            },                       
-                            {
-                            Header: "Member Type",
-                            accessor: "Token"
-                            },                       
-                            {
-                            Header: "KYC",
-                            accessor: "Price"
-                            },                       
-                            {
-                            Header: "Edit",
-                            accessor: "Volume",
-                            Cell: row => (
-                                <Link to="/kycSearchResults">
-                                    <FontAwesomeIcon icon="user-edit" size="lg" />
-                                </Link>
-                                )
-                            },                       
-                    ]}
-                    defaultPageSize={10} //access this value from config file
-                    className="-striped -highlight"
-                    sortable={false}
-                    />
+                columns={[
+                    {
+                        Header: "Customer Name",
+                        accessor: "customeName",
+                    },
+                    {
+                        Header: "Account Status",
+                        accessor: "accountStatus"
+                    },
+                    {
+                        Header: "Place",
+                        accessor: "place"
+                    },
+                    {
+                        Header: "Member Since",
+                        accessor: "memberSince"
+                    },
+                    {
+                        Header: "Tokens Traded",
+                        accessor: "tokensTraded"
+                    },
+                    {
+                        Header: "Address",
+                        accessor: "address"
+                    },
+                    {
+                        Header: "Mobile Number",
+                        accessor: "mobileNumber"
+                    },
+                    {
+                        Header: "Member Type",
+                        accessor: "memberType"
+                    },
+                    {
+                        Header: "KYC",
+                        accessor: "kyc"
+                    },
+                    {
+                        Header: "Edit",
+                        accessor: "Volume",
+                        Cell: row => (
+                            <Link to="/kycSearchResults">
+                                <FontAwesomeIcon icon="user-edit" size="lg" />
+                            </Link>
+                        )
+                    },
+                ]}
+                //defaultPageSize={10} //access this value from config file
+                className="-striped -highlight"
+                sortable={false}
+                manual
+                data={data}
+                noDataText="There are no results to display."
+                pages={searchResultPageCount}
+                loading={isLoading}
+                sortable={false}
+                onFetchData={this.getData}
+                defaultPageSize={config.searchResultsPerPage}
+                previousText='Prev'
+                nextText='Next'
+            />
         );
     }
 }
