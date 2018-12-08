@@ -20,10 +20,10 @@ import { makeData } from "../../Utils";
 
 class CommissionSettings extends Component {
 
-    state = {
-        buyCommissionData: makeData(),
-        sellCommissionData: makeData()
-    }
+    // state = {
+    //     buyCommissionData: makeData(),
+    //     sellCommissionData: makeData()
+    // }
 
     // fetchBuyCommission = () => {
     //
@@ -36,8 +36,8 @@ class CommissionSettings extends Component {
         return (
             <div className="adminMod">
                 <MainHeader heading="commission settings" subHeading="buy & sell"/>
-                <CardLayout Header="Buy" iconName="user" Body={<CommissionsTable data={this.state.buyCommissionData}/>}/>
-                <CardLayout Header="Sell" iconName="user" Body={<CommissionsTable data={this.state.sellCommissionData}/>} />
+                <CardLayout Header="Buy" iconName="user" Body={<CommissionsTable commissionType="Buy" />}/>
+                <CardLayout Header="Sell" iconName="user" Body={<CommissionsTable commissionType="Sell" />} />
             </div>
         )
     }

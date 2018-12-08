@@ -2,13 +2,9 @@ import React from 'react';
 import { Col, Row, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import MainHeader from "../MainHeader/MainHeader";
+import config from '../../config/config';
 
 import Select from 'react-select';
-
-const userTypeOptions = [
-    { value: 'super admin', label: 'Super Admin' },
-    { value: 'admin', label: 'Admin' }
-];
 
 const userList = [
     { value: 'Neeharika', label: 'Neeharika' },
@@ -18,12 +14,12 @@ const userList = [
 
 class SetUserRights extends React.Component {
     state = {
-        userTypeselectedOption: null,
+        adminType: null,
         selectedUser: null
     }
 
-    handleUserTypeChange = (userTypeselectedOption) => {
-        this.setState({ userTypeselectedOption });
+    handleAdminTypeChange = (adminType) => {
+        this.setState({ adminType });
         ;
     }
 
@@ -33,7 +29,7 @@ class SetUserRights extends React.Component {
     }
  
     render() {
-        const { selectedUser, userTypeselectedOption } = this.state;
+        const { selectedUser, adminType } = this.state;
 
         return (
             <div className="adminMod">
@@ -52,13 +48,14 @@ class SetUserRights extends React.Component {
                         <FormGroup>
                             <Label for="superAdminLabel" hidden>Super Admin</Label>
                             <Select
-                                value={userTypeselectedOption}
-                                onChange={this.handleUserTypeChange}
-                                options={userTypeOptions}
+                                value={adminType}
+                                onChange={this.handleAdminTypeChange}
+                                options={config.adminTypeOptions}
                                 placeholder="Admin Type"
                             />
                         </FormGroup>
-                        <Button className="whtBtn" tag={Link} to="/addNewUser">Add New User</Button>
+                        {/* ********add functionality here - Onclick of add new user show a modal dialogue box with confirm and cancel buttons and display after user clciks confirm************ */}
+                        <Button className="whtBtn">Change</Button>
                     </Form>
                 </Col>
             </div>

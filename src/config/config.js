@@ -29,7 +29,20 @@ export default {
         customerInfo :'/CustomersInfo/FetchCustomerInfo',
         dashboard: "/Dashboard/GetDashboardDetail",
         advancedSearch: "/AdvancedSearch/FetchAdvancedSearch ",
+        createUser: "",
+        setUserRights: "",
+        buyCommissionSettings: "",
+        sellCommissionSettings: "",
+        withdrawalTransfers: "",
+        depositTransfers: "",
+        userFiatWallet: ""
     },
+
+    
+    adminTypeOptions: [
+        { value: 'super admin', label: 'Super Admin' },
+        { value: 'admin', label: 'Admin' }
+    ],
 
     /* visible records in tables */
     //

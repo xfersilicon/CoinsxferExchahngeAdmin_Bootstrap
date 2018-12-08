@@ -5,26 +5,35 @@ import "react-table/react-table.css";
 import { Redirect, Link } from "react-router-dom";
 
 import { makeData } from "../../../Utils";
+import { fetchBuyCommissionSettings } from '../../../Api/ApiCalls';
 
 class BuyCommissionsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: makeData()
+            isLoading: true,
+            data: [],
+            searchResultPageCount: null
         };
-        this.renderEditable = this.renderEditable.bind(this);
-        this.renderInput = this.renderInput.bind(this);
     }
-    renderEditable(cellInfo) {
-        return (
-            <input type="date" />
-        );
-    }
-    renderInput(cellInfo) {
-        return (
-            <input type="text" />
-        );
-    }
+
+    // getData = async (state, instance) => {
+    //     //console.log(state);
+    //     this.setState({
+    //         isLoading: false,
+    //     });
+    //    const url = `${config.user}` + config.urls.buyCommissionSettings;
+    //     const paginationObj = {
+    //         Skip: (state.page) * state.pageSize,
+    //         Take: state.pageSize
+    //     }
+    //     let response = await fetchBuyCommissionSettings(paginationObj);
+    //     console.log(response);
+    //     this.setState({
+    //         data: response.data,
+    //         searchResultPageCount: response.pageCount
+    //     })
+    // }
 
     render() {
         const { data } = this.state;

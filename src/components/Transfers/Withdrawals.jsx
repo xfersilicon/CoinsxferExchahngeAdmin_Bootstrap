@@ -45,12 +45,12 @@ class Withdrawals extends Component {
                             </Col>
                         </FormGroup>
                         </Col>
-                        <FormGroup row style={{float:"right"}}>
+                        {/* <FormGroup row style={{float:"right"}}>
                             <Label for="searchInputLabel" sm={2}>Search</Label>
                             <Col sm={8}>
                                 <Input type="text" name="searchInput" id="searchInput" placeholder="" />
                             </Col>
-                        </FormGroup>
+                        </FormGroup> */}
                     </Form>
                 <div>
                     <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable />} />

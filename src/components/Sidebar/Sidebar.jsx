@@ -47,10 +47,10 @@ var tree = [
             }
         ]
     },
-
-    {
-        text: "fiat wallet"
-    },
+    //NOTE: Do not remove the code. This is planned for next stage of development. So commented as of now. Please uncomment it during development 
+    // {
+    //     text: "fiat wallet"
+    // },
 ];
 
 export default class Sidebar extends Component {

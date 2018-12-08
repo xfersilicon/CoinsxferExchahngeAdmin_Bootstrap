@@ -2,10 +2,33 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import { fetchBuyCommissionSettings } from '../../../Api/ApiCalls';
 
 class CommissionsTable extends React.Component {
     constructor(props){
         super(props);
+        this.state= {
+            buyCommissionData: [],
+            sellCommissionData: [],
+            isLoading: true
+        }
+    }
+
+    // componentDidMount() {
+    //     //call service to get commision data
+    //     this.getData()
+    // }
+
+   getData = async () => {
+        this.setState({
+            isLoading: true,
+        });
+        let response = await fetchBuyCommissionSettings();
+        console.log(response);
+        this.setState({
+            buyCommissionData: response.data,
+            sellCommissionData: response.data,
+        })
     }
 
     renderEditable = (cellInfo) => {
@@ -21,10 +44,11 @@ class CommissionsTable extends React.Component {
 
 
     render() {
-        const { data } = this.props;
+        const { commissionType } = this.props;
+        const { buyCommissionData, sellCommissionData } = this.props;
         return (
             <ReactTable
-                data={data}
+                data={commissionType === 'Buy' ? buyCommissionData : sellCommissionData}
                 style={{
                     lineHeight: "0.8em",
                     textAlign: "center",
@@ -59,36 +83,37 @@ class CommissionsTable extends React.Component {
                     },
                     {
                         Header: "From Date",
-                        accessor: "TimeStamp",
+                        accessor: "timeStamp",
                         Cell: this.renderEditable
                     },
                     {
                         Header: "To Date",
-                        accessor: "TimeStamp",
+                        accessor: "timeStamp",
                         Cell: this.renderEditable
                     },
                     {
                         Header: "Commission",
-                        accessor: "Price",
+                        accessor: "price",
                         Cell: this.renderInput
                     },
                     {
                         Header: "Volume",
-                        accessor: "Volume",
+                        accessor: "volume",
                         Cell: this.renderInput
                     },
                     {
                         Header: "Default Commission",
-                        accessor: "Price"
+                        accessor: "price"
                     },
                     {
                         Header: "Confirmation",
-                        accessor: "Type"
+                        accessor: "type"
                     },
                 ]}
-                defaultPageSize={10}  //access this value from config file
+                defaultPageSize={5}  //access this value from config file
                 className="-striped -highlight"
                 sortable={false}
+                showPagination={false}
             />
         );
     }

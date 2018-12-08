@@ -18,16 +18,7 @@ class CustomerManagementUsersTable extends React.Component {
         this.state = {
             isLoading: true,
             data: [],
-            searchResultPageCount: null,
-            // customeName: '',
-            // accountStatus: '',
-            // place: '',
-            // memberSince: '',
-            // tokensTraded: '',
-            // address: '',
-            // mobileNumber: '',
-            // memberType: '',
-            // kyc:''
+            searchResultPageCount: null
         };
     }
 

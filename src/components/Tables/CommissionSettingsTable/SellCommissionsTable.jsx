@@ -2,30 +2,38 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { Redirect, Link } from "react-router-dom";
+import { fetchSellCommissionSettings } from '../../../Api/ApiCalls';
 
+import { Redirect, Link } from "react-router-dom";
 import { makeData } from "../../../Utils";
 
 class SellCommissionsTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: makeData()
+            isLoading: true,
+            data: [],
+            searchResultPageCount: null
         };
-        this.renderEditable = this.renderEditable.bind(this);
-        this.renderInput = this.renderInput.bind(this);
     }
 
-    renderEditable(cellInfo) {
-        return (
-            <input type="date" />
-        );
-    }
-    renderInput(cellInfo) {
-        return (
-            <input type="text" placeholder="Enter"/>
-        );
-    }
+    // getData = async (state, instance) => {
+    //     //console.log(state);
+    //     this.setState({
+    //         isLoading: false,
+    //     });
+    //    const url = `${config.user}` + config.urls.sellCommissionSettings;
+    //     const paginationObj = {
+    //         Skip: (state.page) * state.pageSize,
+    //         Take: state.pageSize
+    //     }
+    //     let response = await fetchSellCommissionSettings(paginationObj);
+    //     console.log(response);
+    //     this.setState({
+    //         data: response.data,
+    //         searchResultPageCount: response.pageCount
+    //     })
+    // }
 
 
     render() {

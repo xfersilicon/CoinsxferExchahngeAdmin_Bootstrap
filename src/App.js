@@ -27,7 +27,8 @@ class App extends Component {
 
 //   setCookie = (token) => {
 //     const { cookies } = this.props;
-//     cookies.set('SessionID', token, { path: '/' });
+//     //document.cookie = "SessionID" + "=" + token + ";domain=*;path=/";
+//     cookies.set('SessionID', token, { path: '/'});
 //     this.setState({
 //         SessionID: token
 //     })
