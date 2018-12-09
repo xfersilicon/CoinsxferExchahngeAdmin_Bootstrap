@@ -52,28 +52,28 @@ class WithdrawalsTable extends React.Component {
                         accessor: "Coin",
                     },
                     {
-                        Header: "From Date",
+                        Header: "Submitted On",
                         accessor: "TimeStamp"
                     },
                     {
-                        Header: "To Date",
+                        Header: "Completed On",
                         accessor: "TimeStamp"
                     },
                     {
                         Header: "Commission",
-                        accessor: "Price"
+                        accessor: "commission"
                     },
                     {
                         Header: "Volume",
                         accessor: "Volume"
                     },
                     {
-                        Header: "Default Commission",
-                        accessor: "Price"
+                        Header: "Transaction Hash",
+                        accessor: "transactionHash"
                     },
                     {
-                        Header: "Confirmation",
-                        accessor: "Type"
+                        Header: "Status",
+                        accessor: "status"
                     },
                 ]}
                 defaultPageSize={10}  //access this value from config file

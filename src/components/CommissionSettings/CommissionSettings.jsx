@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
-import { Col, Row, Jumbotron, Form, FormGroup, Label, Input } from 'reactstrap';
 import MainHeader from "../MainHeader/MainHeader";
-// import BuyCommissionsTable from '../Tables/CommissionSettingsTable/BuyCommissionsTable';
-// import SellCommissionsTable from '../Tables/CommissionSettingsTable/SellCommissionsTable';
 import CommissionsTable from '../Tables/CommissionSettingsTable/CommissionsTable';
 import CardLayout from '../../layouts/cardLayout';
-
-import { makeData } from "../../Utils";
 
 // const CommissionSettings = () => {
 //     return (
@@ -19,19 +14,6 @@ import { makeData } from "../../Utils";
 // }
 
 class CommissionSettings extends Component {
-
-    // state = {
-    //     buyCommissionData: makeData(),
-    //     sellCommissionData: makeData()
-    // }
-
-    // fetchBuyCommission = () => {
-    //
-    // }
-    //
-    // fetchSellCommission = () => {
-    //
-    // }
     render(){
         return (
             <div className="adminMod">

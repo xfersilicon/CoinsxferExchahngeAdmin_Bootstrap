@@ -20,17 +20,17 @@ var tree = [
         text: "advanced search"
     },
 
-    {
-        text: "super admin",
-        nodes: [
-            {
-                text: "create user",
-            },
-            {
-                text: "set user rights"
-            }
-        ]
-    },
+    // {
+    //     text: "super admin",
+    //     nodes: [
+    //         {
+    //             text: "create user",
+    //         },
+    //         {
+    //             text: "set user rights"
+    //         }
+    //     ]
+    // },
 
     {
         text: "commissions settings",

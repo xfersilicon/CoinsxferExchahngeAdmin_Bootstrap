@@ -186,9 +186,9 @@ export const postSetUserRights = (params) => {
 }
 
 //API call to fetch Buy Commission Settings
-export const fetchBuyCommissionSettings = () => {
+export const fetchCommissionSettings = () => {
 
-    const url = `${config.user}` + config.urls.customerInfo;
+    const url = `${config.user}` + config.urls.commissionSettings;
 
     return axios.get(url)
         .then(res => {

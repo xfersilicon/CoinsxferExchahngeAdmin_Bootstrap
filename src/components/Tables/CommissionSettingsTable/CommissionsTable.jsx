@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { fetchBuyCommissionSettings } from '../../../Api/ApiCalls';
+import { fetchCommissionSettings } from '../../../Api/ApiCalls';
 
 class CommissionsTable extends React.Component {
     constructor(props){
@@ -14,16 +14,16 @@ class CommissionsTable extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     //call service to get commision data
-    //     this.getData()
-    // }
+    componentDidMount() {
+        //call service to get commision data
+        this.getData()
+    }
 
    getData = async () => {
         this.setState({
             isLoading: true,
         });
-        let response = await fetchBuyCommissionSettings();
+        let response = await fetchCommissionSettings();
         console.log(response);
         this.setState({
             buyCommissionData: response.data,
@@ -78,33 +78,45 @@ class CommissionsTable extends React.Component {
 
                 columns={[
                     {
-                        Header: "Coin Type",
-                        accessor: "Coin",
+                        Header: "Coin",
+                        accessor: "accountType",
                     },
                     {
-                        Header: "From Date",
-                        accessor: "timeStamp",
-                        Cell: this.renderEditable
+                        Header: "Description",
+                        accessor: "description",
                     },
+
                     {
-                        Header: "To Date",
-                        accessor: "timeStamp",
-                        Cell: this.renderEditable
+                        Header: "Type",
+                        accessor: "transactionType"
                     },
+                    //{
+                      //  Header: "From Date",
+                      //  accessor: "timeStamp",
+                      //  Cell: this.renderEditable
+                    //},
+                    //{
+                    //    Header: "To Date",
+                    //    accessor: "timeStamp",
+                    //    Cell: this.renderEditable
+                    //},
                     {
                         Header: "Commission",
-                        accessor: "price",
-                        Cell: this.renderInput
+                        accessor: "commission",
+                        //Cell: this.renderInput
                     },
+
                     {
-                        Header: "Volume",
-                        accessor: "volume",
-                        Cell: this.renderInput
+                        Header: "Commission Type",
+                        accessor: "commissionType",
+                        //Cell: this.renderInput
                     },
+                    
                     {
-                        Header: "Default Commission",
-                        accessor: "price"
+                        Header: "Confirmation",
+                        accessor: "type"
                     },
+                    
                     {
                         Header: "Confirmation",
                         accessor: "type"

@@ -31,6 +31,7 @@ export default {
         advancedSearch: "/AdvancedSearch/FetchAdvancedSearch ",
         createUser: "",
         setUserRights: "",
+        commissionSettings: "/CommissionSettings/GetCommissionSettings",
         buyCommissionSettings: "",
         sellCommissionSettings: "",
         withdrawalTransfers: "",
