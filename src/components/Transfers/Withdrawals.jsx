@@ -15,7 +15,10 @@ const coinTypeOptions = [
 
 class Withdrawals extends Component {
     state = {
-        selectedCoinType: 'BTC'
+        selectedCoinType: {
+            label: 'BTC',
+            value: 'BTC'
+        }
     };
 
     handleCoinTypeChange = (selectedCoinType) => {
@@ -32,11 +35,11 @@ class Withdrawals extends Component {
                         <Col lg={6} style={{ margin: "0 auto" }}>
                         <FormGroup row>
                             <Col lg="12">
-                                <Label for="coinPairLabel">Coin Type</Label>
+                                <Label for="coinPairLabel">Coin</Label>
                             </Col>
                             <Col lg="12">
                                 <Select
-                                    label= "Coin Type"
+                                    label= "Coin"
                                     value={selectedCoinType}
                                     onChange={this.handleCoinTypeChange}
                                     options={coinTypeOptions}
@@ -53,7 +56,7 @@ class Withdrawals extends Component {
                         </FormGroup> */}
                     </Form>
                 <div>
-                    <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable selectedCoinType={this.state.selectedCoinType}/>} />
+                    <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable selectedCoinType={this.state.selectedCoinType.value}/>} />
                 </div>
             </div>
         );

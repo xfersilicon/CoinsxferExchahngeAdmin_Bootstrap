@@ -38,6 +38,24 @@ class WithdrawalsTable extends React.Component {
         });
     }
 
+    fetchData = async () => {
+        this.setState({
+            isLoading: true,
+        });
+        const paginationObj = {
+            coinType: this.state.selectedCoinType,
+            Skip: 0,
+            Take: 10
+        }
+        let response = await fetchWithdrawalTransfers(paginationObj);
+        console.log(response);
+        this.setState({
+            isLoading: false,
+            data: response.data,
+            pageCount: response.pageCount
+        });
+    }
+
     static getDerivedStateFromProps(nextProps, prevState) {
         // console.log('====================================');
         // console.log('getDerivedStateFromProps:\n');
@@ -107,16 +125,16 @@ class WithdrawalsTable extends React.Component {
                     {
                         Header: "Submitted On",
                         accessor: "submittedOn",
-                        // Cell: (row) => {
-                        //     return moment.utc(row.original.timeStamp, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
-                        // }
+                        Cell: (row) => {
+                            return moment.utc(row.original.submittedOn, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
+                        }
                     },
                     {
                         Header: "Completed On",
                         accessor: "completedOn",
-                        // Cell: (row) => {
-                        //     return moment.utc(row.original.timeStamp, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
-                        // }
+                        Cell: (row) => {
+                            return moment.utc(row.original.completedOn, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
+                        }
                     },
                     {
                         Header: "Commission",
@@ -130,6 +148,7 @@ class WithdrawalsTable extends React.Component {
                         Header: "Transaction Hash",
                         accessor: "transactionHash"
                     },
+
                     // {
                     //     Header: "Status",
                     //     accessor: "status"
@@ -142,7 +161,6 @@ class WithdrawalsTable extends React.Component {
                 noDataText="There are no results to display."
                 pages={pageCount}
                 loading={isLoading}
-                sortable={false}
                 onFetchData={this.getData}
                 defaultPageSize={config.withdrawalResultsPerPage}
                 previousText='Prev'

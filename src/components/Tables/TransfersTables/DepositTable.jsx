@@ -23,9 +23,27 @@ class DepositTable extends React.Component {
             isLoading: true,
         });
         const paginationObj = {
-            coinType: this.props.selectedCoinType,
+            coinType: this.state.selectedCoinType,
             Skip: (state.page) * state.pageSize,
             Take: state.pageSize
+        }
+        let response = await fetchDepositTransfers(paginationObj);
+        console.log(response);
+        this.setState({
+            isLoading: false,
+            data: response.data,
+            pageCount: response.pageCount
+        });
+    }
+
+    fetchData = async () => {
+        this.setState({
+            isLoading: true,
+        });
+        const paginationObj = {
+            coinType: this.state.selectedCoinType,
+            Skip: 0,
+            Take: 10
         }
         let response = await fetchDepositTransfers(paginationObj);
         console.log(response);
@@ -61,7 +79,7 @@ class DepositTable extends React.Component {
             // console.log('====================================');
             // console.log('fetching buySell History');
             // console.log('====================================');
-            this.getData();
+            this.fetchData();
         }
     }
 
@@ -109,9 +127,9 @@ class DepositTable extends React.Component {
                     {
                         Header: "Date",
                         accessor: "created",
-                        // Cell: (row) => {
-                        //     return moment.utc(row.original.timeStamp, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
-                        // }
+                        Cell: (row) => {
+                            return moment.utc(row.original.created, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
+                        }
                     },
                     {
                         Header: "Volume",
@@ -119,7 +137,14 @@ class DepositTable extends React.Component {
                     },
                     {
                         Header: "Status",
-                        accessor: "status"
+                        accessor: "status",
+                        getProps: (state, rowInfo) => {
+                            return {
+                                style: {
+                                    color: rowInfo && rowInfo.row && rowInfo.row.status === "Completed" ? "green" : "red"
+                                }
+                            };
+                        }
                     }
                 ]}
                 className="-striped -highlight"
@@ -129,7 +154,6 @@ class DepositTable extends React.Component {
                 noDataText="There are no results to display."
                 pages={pageCount}
                 loading={isLoading}
-                sortable={false}
                 onFetchData={this.getData}
                 defaultPageSize={config.depositResultsPerPage}
                 previousText='Prev'

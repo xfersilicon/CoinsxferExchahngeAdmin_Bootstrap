@@ -10,7 +10,10 @@ import config from '../../config/config';
 
 class Deposits extends Component {
     state = {
-        selectedCoinType: 'BTC'
+        selectedCoinType: {
+            label: 'BTC',
+            value: 'BTC'
+        }
     };
 
     handleCoinTypeChange = (selectedCoinType) => {
@@ -27,11 +30,11 @@ class Deposits extends Component {
                     <Col lg={6} style={{ margin: "0 auto" }}>
                         <FormGroup row>
                             <Col lg="12">
-                                <Label for="coinPairLabel">Coin Type</Label>
+                                <Label for="coinPairLabel">Coin</Label>
                             </Col>
                             <Col lg="12">
                                 <Select
-                                    label= "Coin Type"
+                                    label= "Coin"
                                     value={selectedCoinType}
                                     onChange={this.handleCoinTypeChange}
                                     options={config.coinTypeOptions}
@@ -48,7 +51,7 @@ class Deposits extends Component {
                     </FormGroup> */}
                 </Form>
                 <div>
-                    <CardLayout Header="Deposits" iconName="user" Body={<DepositTable selectedCoinType={this.state.selectedCoinType}/>} />
+                    <CardLayout Header="Deposits" iconName="user" Body={<DepositTable selectedCoinType={this.state.selectedCoinType.value}/>} />
                 </div>
             </div>
         );

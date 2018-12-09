@@ -16,41 +16,44 @@ class CommissionsTable extends React.Component {
         }
     }
 
-    componentDidMount() {
-        //call service to get commision data
-        this.getData()
-    }
-
     getData = async (state, instance) => {
-        const url = `${config.user}` + config.urls.commissionSettings;
+        // console.log("state", state);
+        console.log("instance ", instance);
 
         let response = await fetchCommissionSettings();
         console.log(response);
+
+        await response.map((column) => {
+            this.setState({
+                [column.description]: null
+            })
+        })
         this.setState({
             data: response,
             isLoading: false
         })
+        console.log("state", state);
     }
-
-
-        // getInitialState(){
-        //     return {selectValue:'test'};
-        // }
 
     renderInput = (cellInfo) => {
         console.log(cellInfo.original.calculationType);
+        const feeType = cellInfo.original.description
+
+        console.log()
+        // this.setState({
+        //     [feeType]: null
+        // })
         return (
-            <select value={cellInfo.original.calculationType}
+            <select value={this.state.feeType === null ? cellInfo.original.calculationType : this.state.feeType}
                 className="form-control"
-                id="selectedCalculationType"
-                name="selectedCalculationType"
+                id={cellInfo.original.description}
+                name={cellInfo.original.calculationType}
                 onChange={this.handleChange}
-                //onBlur={props.showErrors}
-                //disabled={isPersonalDisabled}
-                //required
+            //onBlur={props.showErrors}
+            //disabled={isPersonalDisabled}
+            //required
             >
-                <option value="Percentage">test</option>
-                <option value="Fixed">Fixed</option>
+                {config.calculationTypeOptions.map((state) => <option key={state.value} value={state.value}>{state.label}</option>)}
             </select>
         );
     }
@@ -59,8 +62,14 @@ class CommissionsTable extends React.Component {
         const name = e.target.name;
         const value = e.target.value;
 
+        const id = e.currentTarget.getAttribute('id');
+
+        console.log(id);
+        console.log("value", value);
+
         this.setState({
-            [name]: value
+            [id]: value
+            //[name]: value
         });
     }
 
@@ -69,7 +78,6 @@ class CommissionsTable extends React.Component {
         const { data, isLoading } = this.state;
         return (
             <ReactTable
-                data={data}
                 style={{
                     lineHeight: "0.8em",
                     textAlign: "center",
@@ -130,14 +138,17 @@ class CommissionsTable extends React.Component {
                     },
 
                 ]}
-                defaultPageSize={5}  //access this value from config file
+                
+
+                manual
+                data={data}
+                defaultPageSize={8}  //access this value from config file
                 className="-striped -highlight"
                 sortable={false}
-                showPagination={false}
+                onFetchData={this.getData}
+                showPagination={true}
                 noDataText="There are no results to display."
                 loading={isLoading}
-                defaultPageSize={config.searchResultsPerPage}
-
             />
         );
     }
