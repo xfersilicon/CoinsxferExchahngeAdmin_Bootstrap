@@ -14,7 +14,7 @@ class WithdrawalsTable extends React.Component {
         this.state = {
             data: [],
             isLoading: true,
-            coinType: 'BTC',
+            selectedCoinType: this.props.selectedCoinType,
             pageCount: null
         };
     }
@@ -62,11 +62,11 @@ class WithdrawalsTable extends React.Component {
         // console.log('nextProps: ', nextProps);
         // console.log('prevState: ', prevState);
         // console.log('====================================');
-        if (nextProps.coinType !== prevState.coinType) {
+        if (nextProps.selectedCoinType !== prevState.selectedCoinType) {
             // console.log('====================================');
             // console.log('market changed');
             // console.log('====================================');
-            return { coinType: nextProps.coinType };
+            return { selectedCoinType: nextProps.selectedCoinType };
         } else return null;
     }
 
@@ -77,11 +77,11 @@ class WithdrawalsTable extends React.Component {
         // console.log('prevState: ', prevState);
         // console.log('current market : ', this.state.market);
         // console.log('====================================');
-        if (prevState.coinType !== this.state.coinType) {
+        if (prevState.selectedCoinType !== this.state.selectedCoinType) {
             // console.log('====================================');
             // console.log('fetching buySell History');
             // console.log('====================================');
-            this.getData();
+            this.fetchData();
         }
     }
 

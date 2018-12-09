@@ -28,7 +28,7 @@ class CustomerManagementUsersTable extends React.Component {
     getData = async (state, instance) => {
         //console.log(state);
         this.setState({
-            isLoading: false,
+            isLoading: true,
         });
        const url = `${config.user}` + config.urls.customerInfo;
         const paginationObj = {
@@ -39,6 +39,7 @@ class CustomerManagementUsersTable extends React.Component {
         console.log(response);
         this.setState({
             data: response.data,
+            isLoading: false,
             searchResultPageCount: response.pageCount
         })
     }
