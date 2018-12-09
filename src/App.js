@@ -7,7 +7,10 @@ import compose from 'compose-function';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard} from '@fortawesome/free-solid-svg-icons';
 import LoadingIndicator from './components/Utils/Loaders/LoadingIndicator';
-
+import axios from 'axios';
+import config from "./config/config";
+import { toast } from 'react-toastify';
+import qs from 'qs';
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 
 library.add(faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard);
@@ -20,7 +23,7 @@ class App extends Component {
 
     this.state = {
         isLoading: false,
-        isAuthenticated: true,
+        isAuthenticated: false,
         SessionID: cookies.get('SessionID') || null
     };
   }
@@ -46,57 +49,57 @@ class App extends Component {
     this.setState({ isLoading: loaded });
   }
 
-//   handleLogout = event => {
-//     event.preventDefault();
+  handleLogout = event => {
+    event.preventDefault();
 
-//     this.userLoggingOut(true);
-//     this.setState({
-//         isLoggingOut : true
-//     })
+    this.userLoggingOut(true);
+    this.setState({
+        isLoggingOut : true
+    })
 
-//     let logoutFormObj = {
-//         "email": sessionStorage.getItem('email')
-//     }
+    let logoutFormObj = {
+        "email": sessionStorage.getItem('email')
+    }
     
-//     axios.post(`${config.user}/UserInternal/LogOutUser`, qs.stringify(logoutFormObj), {withCredentials:true})
-//         .then(res => {
-//             const { cookies } = this.props;
-//             this.userHasAuthenticated(false);
-//             this.userLoggingOut(false);
-//             sessionStorage.clear();
-//             cookies.remove('SessionID', {path: '/'});
-//             this.props.history.push("/login");
-//         }).catch(error => {
-//                 this.userLoggingOut(false);
-//                 // return error.response;
-//                 if (error.response) {
-//                     // The request was made and the server responded with a status code
-//                     // that falls out of the range of 2xx
-//                     console.log(">>>>>>>>>>> Response Headers >>>>>>>>>>>>>>>>");
-//                     console.log(error.response.data);
-//                     console.log(error.response.status);
-//                     console.log(error.response.headers);
-//                     console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    axios.post(`${config.user}/UserInternal/LogOutUser`, qs.stringify(logoutFormObj), {withCredentials:true})
+        .then(res => {
+            const { cookies } = this.props;
+            this.userHasAuthenticated(false);
+            this.userLoggingOut(false);
+            sessionStorage.clear();
+            cookies.remove('SessionID', {path: '/'});
+            this.props.history.push("/login");
+        }).catch(error => {
+                this.userLoggingOut(false);
+                // return error.response;
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(">>>>>>>>>>> Response Headers >>>>>>>>>>>>>>>>");
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-//                     if(error.response.data){
-//                         toast.error(error.response.data.Message);
-//                     } else {
-//                         toast.error("Response not received from server");
-//                     }
-//                 } else if (error.request) {
-//                     // The request was made but no response was received
-//                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-//                     // http.ClientRequest in node.js
-//                     console.log(error.request);
-//                     toast.error("Response not received from server")
-//                 } else {
-//                     // Something happened in setting up the request that triggered an Error
-//                     console.log('Error', error.message);
-//                     toast.error('Some Error Occcured in sending the request');
-//                 }
-//                 console.log(error.config);
-//         })
-// }
+                    if(error.response.data){
+                        toast.error(error.response.data.Message);
+                    } else {
+                        toast.error("Response not received from server");
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                    toast.error("Response not received from server")
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    toast.error('Some Error Occcured in sending the request');
+                }
+                console.log(error.config);
+        })
+}
 
   render() {
     const childProps = {
