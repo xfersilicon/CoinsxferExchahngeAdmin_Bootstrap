@@ -2,13 +2,10 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import config from "../../config/config";
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import LoaderButton from '../Utils/Loaders/LoaderButton';
 import axios from "axios";
 import qs from "qs";
-
-// axios.defaults.withCredentials = true;
 
 class Login extends Component {
     constructor(props) {

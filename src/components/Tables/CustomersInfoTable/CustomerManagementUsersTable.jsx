@@ -1,15 +1,10 @@
 import React from 'react';
-import { Card, CardHeader, CardBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { Redirect, Link } from "react-router-dom";
 import { fetchCustomersInfo } from "../../../Api/ApiCalls";
 import config from '../../../config/config';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-
 
 
 class CustomerManagementUsersTable extends React.Component {

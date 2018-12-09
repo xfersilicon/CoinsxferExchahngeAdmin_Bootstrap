@@ -47,6 +47,12 @@ var tree = [
             }
         ]
     },
+    {
+        text: "corporate balance"
+    },
+    {
+        text: "transaction hash"
+    }
     //NOTE: Do not remove the code. This is planned for next stage of development. So commented as of now. Please uncomment it during development 
     // {
     //     text: "fiat wallet"

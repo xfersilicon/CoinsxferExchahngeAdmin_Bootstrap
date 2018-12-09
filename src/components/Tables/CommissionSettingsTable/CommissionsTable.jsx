@@ -1,16 +1,18 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button } from 'reactstrap';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { fetchCommissionSettings } from '../../../Api/ApiCalls';
+import config from '../../../config/config';
+
 
 class CommissionsTable extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state= {
-            buyCommissionData: [],
-            sellCommissionData: [],
-            isLoading: true
+        this.state = {
+            data: [],
+            isLoading: true,
+            selectedCalculationType: null
         }
     }
 
@@ -19,42 +21,60 @@ class CommissionsTable extends React.Component {
         this.getData()
     }
 
-   getData = async () => {
-        this.setState({
-            isLoading: true,
-        });
+    getData = async (state, instance) => {
+        const url = `${config.user}` + config.urls.commissionSettings;
+
         let response = await fetchCommissionSettings();
         console.log(response);
         this.setState({
-            buyCommissionData: response.data,
-            sellCommissionData: response.data,
+            data: response,
+            isLoading: false
         })
     }
 
-    renderEditable = (cellInfo) => {
+
+        // getInitialState(){
+        //     return {selectValue:'test'};
+        // }
+
+    renderInput = (cellInfo) => {
+        console.log(cellInfo.original.calculationType);
         return (
-            <input type="date" />
+            <select value={cellInfo.original.calculationType}
+                className="form-control"
+                id="selectedCalculationType"
+                name="selectedCalculationType"
+                onChange={this.handleChange}
+                //onBlur={props.showErrors}
+                //disabled={isPersonalDisabled}
+                //required
+            >
+                <option value="Percentage">test</option>
+                <option value="Fixed">Fixed</option>
+            </select>
         );
     }
-    renderInput = (cellInfo) => {
-        return (
-            <input type="text" placeholder="Enter"/>
-        );
+
+    handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        this.setState({
+            [name]: value
+        });
     }
 
 
     render() {
-        const { commissionType } = this.props;
-        const { buyCommissionData, sellCommissionData } = this.props;
+        const { data, isLoading } = this.state;
         return (
             <ReactTable
-                data={commissionType === 'Buy' ? buyCommissionData : sellCommissionData}
+                data={data}
                 style={{
                     lineHeight: "0.8em",
                     textAlign: "center",
                     border: "none"
                 }}
-
                 //change to styles to css file wherever react-table is used
                 getTheadProps={() => {
                     return {
@@ -75,7 +95,6 @@ class CommissionsTable extends React.Component {
                 }}
 
                 //until above line
-
                 columns={[
                     {
                         Header: "Coin",
@@ -85,47 +104,40 @@ class CommissionsTable extends React.Component {
                         Header: "Description",
                         accessor: "description",
                     },
-
                     {
-                        Header: "Type",
-                        accessor: "transactionType"
+                        Header: "Calculation Type",
+                        accessor: "calculationType",
+                        Cell: this.renderInput
                     },
-                    //{
-                      //  Header: "From Date",
-                      //  accessor: "timeStamp",
-                      //  Cell: this.renderEditable
-                    //},
-                    //{
-                    //    Header: "To Date",
-                    //    accessor: "timeStamp",
-                    //    Cell: this.renderEditable
-                    //},
                     {
                         Header: "Commission",
                         accessor: "commission",
                         //Cell: this.renderInput
                     },
-
                     {
-                        Header: "Commission Type",
+                        Header: "Type",
                         accessor: "commissionType",
-                        //Cell: this.renderInput
                     },
-                    
                     {
-                        Header: "Confirmation",
-                        accessor: "type"
+                        Header: "Transaction",
+                        accessor: "transactionType"
                     },
-                    
                     {
-                        Header: "Confirmation",
-                        accessor: "type"
+                        Header: "Modify ",
+                        Cell: row => (
+                            <Button className="tab-btn">Update</Button>
+                        )
                     },
+
                 ]}
                 defaultPageSize={5}  //access this value from config file
                 className="-striped -highlight"
                 sortable={false}
                 showPagination={false}
+                noDataText="There are no results to display."
+                loading={isLoading}
+                defaultPageSize={config.searchResultsPerPage}
+
             />
         );
     }

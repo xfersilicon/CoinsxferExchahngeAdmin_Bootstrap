@@ -17,6 +17,9 @@ import Login from "../components/Login/Login";
 
 import AuthenticatedRoute from "./AuthenticatedRoutes/AuthenticatedRoutes.jsx";
 import UnauthenticatedRoute from "./UnauthenticatedRoutes/UnauthenticatedRoutes";
+import CorporateBalance from "../components/CorporateBalance/CorporateBalance";
+import TransactionHash from "../components/TransactionHash/TransactionHash";
+
 
 
 
@@ -35,7 +38,11 @@ export default ({ childProps }) => {
             <AuthenticatedRoute exact path='/deposits' component={Deposits} props={childProps}/>
             <AuthenticatedRoute exact path='/withdrawals' component={Withdrawals}props={childProps} />
             <AuthenticatedRoute exact path='/fiatWallet' component={FiatWallet} props={childProps}/>
-            <AuthenticatedRoute exact path='/kycSearchResults' component={KycSearchResults} props={childProps}/>
+            {/* <AuthenticatedRoute exact path='/kycSearchResults' component={KycSearchResults} props={childProps}/> */}
+            <AuthenticatedRoute exact path='/corporateBalance' component={CorporateBalance} props={childProps}/>
+            <AuthenticatedRoute exact path='/transactionHash' component={TransactionHash} props={childProps}/>
+
+
         </Switch>
     );
 };

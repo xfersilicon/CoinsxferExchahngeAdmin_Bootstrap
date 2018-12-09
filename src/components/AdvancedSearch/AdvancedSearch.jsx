@@ -18,7 +18,7 @@ const coinPairOptions = [
 const transactionTypeOptions = [
     { value: 'BuyOrder', label: 'Buy' },
     { value: 'SellOrder', label: 'Sell' },
-    { value: 'deposit', label: 'Deposit' },
+    { value: 'Deposit', label: 'Deposit' },
     { value: 'withdraw', label: 'Withdrawal' }
 ]
 

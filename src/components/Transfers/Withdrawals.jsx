@@ -15,7 +15,7 @@ const coinTypeOptions = [
 
 class Withdrawals extends Component {
     state = {
-        selectedCoinType: null
+        selectedCoinType: 'BTC'
     };
 
     handleCoinTypeChange = (selectedCoinType) => {
@@ -53,7 +53,7 @@ class Withdrawals extends Component {
                         </FormGroup> */}
                     </Form>
                 <div>
-                    <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable />} />
+                    <CardLayout Header="Withdrawals" iconName="user" Body={<WithdrawalsTable selectedCoinType={this.state.selectedCoinType}/>} />
                 </div>
             </div>
         );

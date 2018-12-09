@@ -18,8 +18,8 @@ class CommissionSettings extends Component {
         return (
             <div className="adminMod">
                 <MainHeader heading="commission settings" subHeading="buy & sell"/>
-                <CardLayout Header="Buy" iconName="user" Body={<CommissionsTable commissionType="Buy" />}/>
-                <CardLayout Header="Sell" iconName="user" Body={<CommissionsTable commissionType="Sell" />} />
+                <CardLayout Header="Commissions" iconName="user" Body={<CommissionsTable/>}/>
+                {/* <CardLayout Header="Sell" iconName="user" Body={<CommissionsTable commissionType="Sell" />} /> */}
             </div>
         )
     }

@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import { Row, Col, Container, Jumbotron, Card, CardHeader, CardBody, FormGroup, Label, Input, Form } from 'reactstrap';
+import { Col, FormGroup, Label, Form } from 'reactstrap';
 import MainHeader from "../MainHeader/MainHeader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CustomerManagementUsersTable from '../Tables/CustomersInfoTable/CustomerManagementUsersTable';
 import CardLayout from '../../layouts/cardLayout';
 import Select from 'react-select';
 import DepositTable from '../Tables/TransfersTables/DepositTable';
+import config from '../../config/config';
 
-
-const coinTypeOptions = [
-    { value: 'BTC', label: 'BTC'},
-    { value: 'XRP', label: 'XRP' },
-    { value: 'ETH', label: 'ETH' }
-];
 
 class Deposits extends Component {
     state = {
-        selectedCoinType: null
+        selectedCoinType: 'BTC'
     };
 
     handleCoinTypeChange = (selectedCoinType) => {
@@ -40,7 +34,7 @@ class Deposits extends Component {
                                     label= "Coin Type"
                                     value={selectedCoinType}
                                     onChange={this.handleCoinTypeChange}
-                                    options={coinTypeOptions}
+                                    options={config.coinTypeOptions}
                                     placeholder="Select coin type"
                                 />
                             </Col>
@@ -54,7 +48,7 @@ class Deposits extends Component {
                     </FormGroup> */}
                 </Form>
                 <div>
-                    <CardLayout Header="Deposits" iconName="user" Body={<DepositTable />} />
+                    <CardLayout Header="Deposits" iconName="user" Body={<DepositTable selectedCoinType={this.state.selectedCoinType}/>} />
                 </div>
             </div>
         );

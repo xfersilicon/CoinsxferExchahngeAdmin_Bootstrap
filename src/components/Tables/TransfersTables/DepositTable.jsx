@@ -2,23 +2,73 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { Redirect, Link } from "react-router-dom";
+import { fetchDepositTransfers } from '../../../Api/ApiCalls';
+import config from '../../../config/config';
+import moment from 'moment';
 
-import { makeData } from "../../../Utils";
 
 class DepositTable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: makeData()
+            data: [],
+            isLoading: true,
+            pageCount: null,
+            selectedCoinType: this.props.selectedCoinType
         };
     }
 
+    getData = async (state, instance) => {
+        this.setState({
+            isLoading: true,
+        });
+        const paginationObj = {
+            coinType: this.props.selectedCoinType,
+            Skip: (state.page) * state.pageSize,
+            Take: state.pageSize
+        }
+        let response = await fetchDepositTransfers(paginationObj);
+        console.log(response);
+        this.setState({
+            isLoading: false,
+            data: response.data,
+            pageCount: response.pageCount
+        });
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        // console.log('====================================');
+        // console.log('getDerivedStateFromProps:\n');
+        // console.log('nextProps: ', nextProps);
+        // console.log('prevState: ', prevState);
+        // console.log('====================================');
+        if (nextProps.selectedCoinType !== prevState.selectedCoinType) {
+            // console.log('====================================');
+            // console.log('market changed');
+            // console.log('====================================');
+            return { selectedCoinType: nextProps.selectedCoinType };
+        } else return null;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        // console.log('====================================');
+        // console.log('componentDidUpdate:\n');
+        // console.log('prevProps: ', prevProps);
+        // console.log('prevState: ', prevState);
+        // console.log('current market : ', this.state.market);
+        // console.log('====================================');
+        if (prevState.selectedCoinType !== this.state.selectedCoinType) {
+            // console.log('====================================');
+            // console.log('fetching buySell History');
+            // console.log('====================================');
+            this.getData();
+        }
+    }
+
     render() {
-        const { data } = this.state;
+        const { data, isLoading, pageCount } = this.state;
         return (
             <ReactTable
-                data={data}
                 style={{
                     lineHeight: "0.8em",
                     textAlign: "center",
@@ -48,37 +98,42 @@ class DepositTable extends React.Component {
 
                 columns={[
                     {
-                        Header: "Coin Type",
-                        accessor: "Coin",
+                        Header: "Coin",
+                        accessor: "accountType",
+                        width: 60
                     },
                     {
-                        Header: "Submitted On",
-                        accessor: "TimeStamp"
+                        Header: "User",
+                        accessor: "userName"
                     },
                     {
-                        Header: "Completed On",
-                        accessor: "TimeStamp"
-                    },
-                    {
-                        Header: "Commission",
-                        accessor: "commission"
+                        Header: "Date",
+                        accessor: "created",
+                        // Cell: (row) => {
+                        //     return moment.utc(row.original.timeStamp, 'YYYY-MM-DD HH:mm:ss [UTC]').local().format('DD-MM-YYYY HH:mm:ss');
+                        // }
                     },
                     {
                         Header: "Volume",
-                        accessor: "Volume"
+                        accessor: "amount"
                     },
                     {
-                        Header: "Transaction Hash",
-                        accessor: "transactionHash"
-                    },
-                    {
-                        Header: "Confirmation",
+                        Header: "Status",
                         accessor: "status"
-                    },
+                    }
                 ]}
-                defaultPageSize={10}  //access this value from config file
                 className="-striped -highlight"
                 sortable={false}
+                manual
+                data={data}
+                noDataText="There are no results to display."
+                pages={pageCount}
+                loading={isLoading}
+                sortable={false}
+                onFetchData={this.getData}
+                defaultPageSize={config.depositResultsPerPage}
+                previousText='Prev'
+                nextText='Next'
             />
         );
     }
