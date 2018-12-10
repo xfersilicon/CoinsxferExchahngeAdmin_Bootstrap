@@ -17,7 +17,7 @@ class CommissionSettings extends Component {
     render(){
         return (
             <div className="adminMod">
-                <MainHeader heading="commission settings" subHeading="buy & sell"/>
+                <MainHeader heading="commission settings" subHeading="trading & transfers"/>
                 <CardLayout Header="Commissions" iconName="user" Body={<CommissionsTable/>}/>
                 {/* <CardLayout Header="Sell" iconName="user" Body={<CommissionsTable commissionType="Sell" />} /> */}
             </div>

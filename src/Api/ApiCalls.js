@@ -407,6 +407,8 @@ export const updateTransactionHash = (params) => {
 
  //API call to update commission settings
 export const updateCommissionSettings= (params) => {
+    console.log(params);
+    
     const url = `${config.user}` + config.urls.updateCommissionSettings;
  
     return axios.post(url, qs.stringify(params))

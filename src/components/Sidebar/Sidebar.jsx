@@ -69,25 +69,34 @@ export default class Sidebar extends Component {
 		}
 		this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
         this.toggle = this.toggle.bind(this);
-	}
+    }
+    
+    componentDidMount() {
+        console.log('sidebar');
+    }
 
     toggle = event => {
         //console.log(event.currentTarget.tagName);
         if(event.currentTarget.tagName === 'LI') {
             const id = event.currentTarget.getAttribute('id');
+            console.log(id);
             this.setState(state => ({ [id]: !state[id] }));
-        }  
+        }
+    }
+
+    addActiveClass = (e) => {
+        console.log(e);
+        console.log(e.currentTarget);
     }
     mapper = (nodes, parentId, lvl) => {
         return nodes.map((node, index) => {
             const id = `${node.text}-${parentId ? parentId : 'top'}`.replace(/[^a-zA-Z0-9-_]/g, '');
-            const item = <React.Fragment>
+            const item = <Fragment>
                             <ListGroupItem style={{ zIndex: 0 }} to={node.nodes ? '' : `/${_.camelCase(node.text)}`} 
                                 tag={node.nodes ? ListGroupItem : Link}
-                                //tag={ListGroupItem}
                                 className={`${parentId ? `rounded-0 ${lvl ? 'border-bottom-0' : ''}` : ''}`} id={id} onClick={this.toggle}>
                                 {
-                                    <div style={{ paddingLeft: `${25 * lvl}px`, textTransform: 'capitalize' }}>
+                                    <div style={{ paddingLeft: `${25 * lvl}px`, textTransform: 'capitalize' }} onClick={this.addActiveClass}>
                                         {_.upperCase(node.text)}
                                         {node.nodes && <div style={{ float: 'right' }} >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</div>}
                                         {/* {node.nodes && <Button style={{ float: 'right' }} color="link" >{this.state[id] ? <i className="fa fa-caret-up"></i> : <i className="fa fa-caret-down"></i>}</Button>} */}
@@ -99,7 +108,7 @@ export default class Sidebar extends Component {
                                     <Collapse isOpen={this.state[id]}>
                                         {this.mapper(node.nodes, id, (lvl || 0) + 1)}
                                     </Collapse>}
-                            </React.Fragment>
+                            </Fragment>
 
             return item;
         });

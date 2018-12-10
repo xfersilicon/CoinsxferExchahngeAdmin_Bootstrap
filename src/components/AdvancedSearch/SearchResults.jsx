@@ -6,6 +6,7 @@ import CardLayout from '../../layouts/cardLayout';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 import ReactToPrint from "react-to-print";
+import config from '../../config/config';
 
 const fileTypeOptions = [
     { value: 'pdf', label: 'PDF' },
@@ -23,7 +24,7 @@ class SearchResults extends Component {
     }
 
     render() { 
-        const { selectedTransactionType, selectedCoinPair, selectedFileType } = this.state;
+        const { selectedFileType } = this.state;
         return (
             <div className="adminMod">
                 <MainHeader heading="search results" subHeading="results"/>
@@ -38,7 +39,7 @@ class SearchResults extends Component {
                                 <Select
                                     value={selectedFileType}
                                     onChange={this.handleFileTypeChange}
-                                    options={fileTypeOptions}
+                                    options={config.fileTypeOptions}
                                     placeholder="Select file type"
                                 />
                             </Col>

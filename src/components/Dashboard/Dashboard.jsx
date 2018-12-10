@@ -17,6 +17,7 @@ class Dashboard extends Component {
     async componentDidMount() {
         let response = await fetchDashboardDetails();
         console.log(response);
+        console.log(this.props.location);
         
         this.setState({
             data: response

@@ -41,7 +41,7 @@
     "recharts": "^1.3.1"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_STAGE=dev react-scripts start",
+    "start": "cross-env REACT_APP_STAGE=dev_local react-scripts start",
     "analyze": "source-map-explorer build/static/js/main.*",
     "build": "react-scripts build",
     "build:dev": "cross-env REACT_APP_STAGE=dev npm run build",

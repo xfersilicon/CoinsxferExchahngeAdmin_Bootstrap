@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Jumbotron} from 'reactstrap';
 // import { Row, Col, Container } from 'reactstrap';
 

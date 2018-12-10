@@ -1,17 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { NavLink as RRNavLink, Link } from "react-router-dom";
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavbarBrand
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

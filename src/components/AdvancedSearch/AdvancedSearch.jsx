@@ -1,32 +1,10 @@
 import React from 'react';
-import { Col, Row, Button, Form, FormGroup, Label, Input, FormText, Jumbotron } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Col, Row, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainHeader from "../MainHeader/MainHeader";
 import Select from 'react-select';
 import SearchResults from './SearchResults';
-
-
-
-// Defining Coir Pair Selection
-const coinPairOptions = [
-    { value: 'ETHBTC', label: 'ETH-BTC' },
-    { value: 'XRPBTC', label: 'XRP-BTC' }
-];
-
-// Defining Transaction Type Options for Selection
-const transactionTypeOptions = [
-    { value: 'BuyOrder', label: 'Buy' },
-    { value: 'SellOrder', label: 'Sell' },
-    { value: 'Deposit', label: 'Deposit' },
-    { value: 'withdraw', label: 'Withdrawal' }
-]
-
-// Defining Options for viewing the result set 
-const fileTypeOptions = [
-    { value: 'pdf', label: 'PDF' },
-    { value: 'doc', label: 'JPEG' }
-]
+import config from '../../config/config';
 
 export default class AdvancedSearch extends React.Component {
     state = {
@@ -39,12 +17,6 @@ export default class AdvancedSearch extends React.Component {
         maxTrans: null,
         toggleComponent: false,
         isDataNull: false
-    }
-
-    handleData = (data) => {
-        this.setState({
-            isDataNull: data
-        })
     }
 
     handleCoinPairChange = (selectedCoinPair) => {
@@ -91,7 +63,7 @@ export default class AdvancedSearch extends React.Component {
                                                 label="Coin Pair"
                                                 value={selectedCoinPair}
                                                 onChange={this.handleCoinPairChange}
-                                                options={coinPairOptions}
+                                                options={config.coinPairOptions}
                                                 placeholder="Select coin pair"
                                             />
                                         </Col>
@@ -104,7 +76,7 @@ export default class AdvancedSearch extends React.Component {
                                             <Select
                                                 value={selectedTransactionType}
                                                 onChange={this.handleTransactionTypeChange}
-                                                options={transactionTypeOptions}
+                                                options={config.transactionTypeOptions}
                                                 placeholder="Select transaction type"
                                             />
                                         </Col>
@@ -137,19 +109,6 @@ export default class AdvancedSearch extends React.Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
-                                    {/* <FormGroup row>
-                                        <Col lg="12">
-                                            <Label for="fileTypeLabel">File Type</Label>
-                                        </Col>
-                                        <Col lg="12">
-                                            <Select
-                                                value={selectedFileType}
-                                                onChange={this.handleFileTypeChange}
-                                                options={fileTypeOptions}
-                                                placeholder="Select file type"
-                                            />
-                                        </Col>
-                                    </FormGroup> */}
                                     <Button className="whtBtn" onClick={this.showSearchResults}><FontAwesomeIcon icon="print" size="sm" /> Search</Button>
                                 </Form>
                             </Col>

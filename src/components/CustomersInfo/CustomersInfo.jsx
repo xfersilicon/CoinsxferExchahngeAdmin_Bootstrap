@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Col, Container, Jumbotron, Card, CardHeader, CardBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import MainHeader from "../MainHeader/MainHeader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactTable from "react-table";
 import "react-table/react-table.css";
-import namor from "namor";
-import $ from "jquery/dist/jquery.min";
 import CustomerManagementUsersTable from '../Tables/CustomersInfoTable/CustomerManagementUsersTable';
 import CardLayout from '../../layouts/cardLayout';
 

@@ -11,7 +11,7 @@ import axios from 'axios';
 import config from "./config/config";
 import { toast } from 'react-toastify';
 import qs from 'qs';
-// import { fab } from '@fortawesome/free-brands-svg-icons'
+// import { fab } from '@fortawesome/free-brands-svg-icons';
 
 library.add(faUser, faArrowLeft, faArrowRight, faUserEdit, faStickyNote, faPrint, faAddressCard);
 
@@ -23,7 +23,7 @@ class App extends Component {
 
     this.state = {
         isLoading: false,
-        isAuthenticated: false,
+        isAuthenticated: true,
         SessionID: cookies.get('SessionID') || null
     };
   }

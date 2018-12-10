@@ -5,14 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const CardLayout = (props) => {
   return (
       <Fragment>
-          <Card style={{"borderColor":"rgb(40, 89, 168)", "margin": "30px", "min-width": "-webkit-fill-available"}}>
-            <CardHeader className="tabHd"><FontAwesomeIcon icon={props.iconName} size="md"/> {props.Header}</CardHeader>
+          <Card style={{"borderColor":"rgb(40, 89, 168)", "margin": "30px", "minWidth": "-webkit-fill-available"}}>
+            <CardHeader className="tabHd"><FontAwesomeIcon icon={props.iconName} size="sm"/> {props.Header}</CardHeader>
             <CardBody className="table-wrapper-scroll-y">
-                <Row>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
               {props.Body}
             </CardBody>
           </Card>
